@@ -1,8 +1,11 @@
 tween = require 'tween'
 
+math.randomseed( os.time() )
+
 SCREEN_HEIGHT = 1080
 ANGLE = 400
 ACTIVE_TAB = 1
+ACTIVE_GAME = 1
 t1 = 0
 OPEN=false
 
@@ -19,6 +22,11 @@ AFTER_Y = SCREEN_HEIGHT - 64
 ACTIVE_X = ANGLE/2
 BEFORE_X = ANGLE-22
 AFTER_X = 22
+
+HIDDEN_GAME_Y = SCREEN_HEIGHT + 100
+ACTIVE_GAME_Y = SCREEN_HEIGHT / 2
+BEFORE_GAME_Y = SCREEN_HEIGHT / 2 - 130
+AFTER_GAME_Y = SCREEN_HEIGHT / 2 + 130
 
 global = {
   x = 0
@@ -42,9 +50,26 @@ tabs = {
   { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
 }
 
+games = {
+  { y=HIDDEN_GAME_Y, title='Game 1 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 2 - With another title' },
+  { y=HIDDEN_GAME_Y, title='Game 3 - With a medium title' },
+  { y=HIDDEN_GAME_Y, title='Game 4 - Quite short' },
+  { y=HIDDEN_GAME_Y, title='Game 5 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 6 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 7 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 8 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 9 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 11 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 12 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='Game 13 - With a pretty long title' },
+}
+
 function love.load()
   love.window.setMode(1920/2, SCREEN_HEIGHT/2, {highdpi = true, msaa = 2})
   love.graphics.setBackgroundColor(0, 0, 50)
+  font = love.graphics.newFont('font.ttf', 40)
+  love.graphics.setFont(font)
 end
 
 function updateTabs()
@@ -70,6 +95,23 @@ function updateTabs()
     tween(0.2, tabs[i],  { y = tab_y }, 'outSine')
     tween(0.2, tabs[i],  { x = tab_x }, 'outSine')
     tween(0.2, global,  { x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH }, 'outSine')
+  end
+
+  for i=1,#games do
+    tween(0.2, games[i],  { y = HIDDEN_GAME_Y }, 'outSine')
+  end
+end
+
+function updateGames()
+  for i=1,#games do
+    if i == ACTIVE_GAME then
+      game_y = ACTIVE_GAME_Y
+    elseif i < ACTIVE_GAME then
+      game_y = BEFORE_GAME_Y
+    else
+      game_y = AFTER_GAME_Y
+    end
+    tween(0.2, games[i],  { y = -ACTIVE_GAME * 80 + game_y + (i - 1) * 80 }, 'outSine')
   end
 end
 
@@ -97,12 +139,14 @@ function openTab()
     tween(0.2, tabs[i],  { x = tab_x }, 'outSine')
     tween(0.2, global,  { x = -1300 }, 'outSine')
   end
+
+  updateGames()
 end
 
 function love.update(dt)
   tween.update(dt)
 
-  if love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
+  if not OPEN and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
     t1 = love.timer.getTime()
     ACTIVE_TAB = ACTIVE_TAB + 1
     if ACTIVE_TAB > #tabs then
@@ -112,7 +156,7 @@ function love.update(dt)
     updateTabs()
   end
 
-  if love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
+  if not OPEN and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
     t1 = love.timer.getTime()
     ACTIVE_TAB = ACTIVE_TAB - 1
     if ACTIVE_TAB < 1 then
@@ -132,7 +176,27 @@ function love.update(dt)
     end
     OPEN = not OPEN
   end
-  
+
+  if OPEN and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.25 then
+    t1 = love.timer.getTime()
+    ACTIVE_GAME = ACTIVE_GAME + 1
+    if ACTIVE_GAME > #games then
+      ACTIVE_GAME = 1
+    end
+
+    updateGames()
+  end
+
+  if OPEN and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.25 then
+    t1 = love.timer.getTime()
+    ACTIVE_GAME = ACTIVE_GAME - 1
+    if ACTIVE_GAME < 1 then
+      ACTIVE_GAME = #games
+    end
+
+    updateGames()
+  end
+
 end
 
 function love.draw()
@@ -156,5 +220,10 @@ function love.draw()
     )
 
     stack_height = stack_height + tabs[i].width
+  end
+
+  for i=1,#games do
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.print(games[i].title, 300, games[i].y + 20)
   end
 end
