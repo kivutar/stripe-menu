@@ -33,14 +33,14 @@ global = {
 }
 
 tabs = {
-  { title="Settings", subtitle="Configure Lakka", width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, color={0 ,0 ,0, 0}, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
-  { title="Super Nintendo", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Nintendo 64", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Genesis", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="PlayStation 2", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="3DO", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Saturn", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Game Boy Advance", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Settings", subtitle="Configure Lakka", title_alpha=255, width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, color={0 ,0 ,0, 0}, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
+  { title="Super Nintendo", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Nintendo 64", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Genesis", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="PlayStation 2", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="3DO", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Saturn", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Game Boy Advance", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
 }
 
 games = {
@@ -72,9 +72,11 @@ function updateTabs()
       tab_zoom = ACTIVE_TAB_ZOOM
       tab_y = ACTIVE_Y
       tab_x = ACTIVE_X
+      tab_title_alpha = 255
     else
       tab_width = PASSIVE_TAB_WIDTH
       tab_zoom = PASSIVE_TAB_ZOOM
+      tab_title_alpha = 0
       if i < ACTIVE_TAB then
         tab_y = BEFORE_Y
         tab_x = BEFORE_X
@@ -87,6 +89,7 @@ function updateTabs()
     tween(0.2, tabs[i],  { zoom = tab_zoom }, 'outSine')
     tween(0.2, tabs[i],  { y = tab_y }, 'outSine')
     tween(0.2, tabs[i],  { x = tab_x }, 'outSine')
+    tween(0.2, tabs[i],  { title_alpha = tab_title_alpha }, 'outSine')
     tween(0.2, global,  { x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH }, 'outSine')
   end
 
@@ -205,13 +208,15 @@ function love.draw()
       global.x + stack_height+tabs[i].width, SCREEN_HEIGHT,
       global.x + stack_height, SCREEN_HEIGHT)
 
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(255, 255, 255, 255)
 
     love.graphics.draw(tabs[i].icon,
       global.x + stack_height + tabs[i].width/2 + tabs[i].x, tabs[i].y,
       0, tabs[i].zoom, tabs[i].zoom,
       128, 128
     )
+
+    love.graphics.setColor(255, 255, 255, tabs[i].title_alpha)
 
     love.graphics.setFont(font)
     love.graphics.printf(tabs[i].title,
