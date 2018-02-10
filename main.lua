@@ -166,15 +166,16 @@ function love.update(dt)
     updateTabs()
   end
 
-  if love.keyboard.isDown("return") and love.timer.getTime() > t1 + 0.25 then
+  if love.keyboard.isDown("return") and not OPEN then
     t1 = love.timer.getTime()
+    openTab()
+    OPEN = true
+  end
 
-    if not OPEN then
-      openTab()
-    else
-      updateTabs()
-    end
-    OPEN = not OPEN
+  if love.keyboard.isDown("backspace") and OPEN then
+    t1 = love.timer.getTime()
+    updateTabs()
+    OPEN = false
   end
 
   if OPEN and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.25 then
