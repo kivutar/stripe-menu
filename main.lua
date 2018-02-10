@@ -1,4 +1,5 @@
 tween = require 'tween'
+require 'hsl'
 
 math.randomseed( os.time() )
 
@@ -33,15 +34,19 @@ global = {
 }
 
 tabs = {
-  { title="Settings", subtitle="Configure Lakka", title_alpha=255, width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, color={0 ,0 ,0, 0}, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
-  { title="Super Nintendo", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Nintendo 64", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Genesis", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="PlayStation 2", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="3DO", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Saturn", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
-  { title="Game Boy Advance", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Settings", subtitle="Configure Lakka", title_alpha=255, width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
+  { title="Super Nintendo", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Nintendo 64", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Genesis", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="PlayStation 2", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="3DO", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Saturn", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Game Boy Advance", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
 }
+
+for i=1,#tabs do
+  tabs[i].color = {HSL((i-1)*10,128,128,255)}
+end
 
 games = {
   { y=HIDDEN_GAME_Y, title='Game 1 - With a pretty long title' },
@@ -60,7 +65,7 @@ games = {
 
 function love.load()
   love.window.setMode(1920/2, SCREEN_HEIGHT/2, {highdpi = true, msaa = 2})
-  love.graphics.setBackgroundColor(0, 0, 50)
+  love.graphics.setBackgroundColor(tabs[1].color)
   font = love.graphics.newFont('font.ttf', 40)
   smallfont = love.graphics.newFont('font.ttf', 25)
 end
@@ -236,6 +241,6 @@ function love.draw()
   love.graphics.setFont(font)
   for i=1,#games do
     love.graphics.setColor(255, 255, 255)
-    love.graphics.print(games[i].title, 300, games[i].y + 20)
+    love.graphics.print(games[i].title, 300, games[i].y + 45)
   end
 end
