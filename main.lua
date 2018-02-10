@@ -33,21 +33,21 @@ global = {
 }
 
 tabs = {
-  { width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
-  { width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Settings", subtitle="Configure Lakka", width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, color={0 ,0 ,0, 0}, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
+  { title="Super Nintendo", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Nintendo 64", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Genesis", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="PlayStation 2", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="3DO", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Saturn", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Game Boy Advance", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Super Nintendo", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-00,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Super Nintendo Entertainment System.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Nintendo 64", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-20,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Nintendo 64.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Genesis", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-40,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Mega Drive - Genesis.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="PlayStation 2", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-60,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sony - PlayStation 2.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="3DO", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/The 3DO Company - 3DO.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Saturn", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Sega - Saturn.png'), zoom=PASSIVE_TAB_ZOOM},
+  { title="Game Boy Advance", subtitle="13 Games - 3 Favorites", width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, color={255-80,math.random(155),math.random(100)}, icon=love.graphics.newImage('png/Nintendo - Game Boy Advance.png'), zoom=PASSIVE_TAB_ZOOM},
 }
 
 games = {
@@ -69,7 +69,7 @@ function love.load()
   love.window.setMode(1920/2, SCREEN_HEIGHT/2, {highdpi = true, msaa = 2})
   love.graphics.setBackgroundColor(0, 0, 50)
   font = love.graphics.newFont('font.ttf', 40)
-  love.graphics.setFont(font)
+  smallfont = love.graphics.newFont('font.ttf', 25)
 end
 
 function updateTabs()
@@ -220,9 +220,22 @@ function love.draw()
       128, 128
     )
 
+    love.graphics.setFont(font)
+    love.graphics.printf(tabs[i].title,
+      global.x + stack_height + tabs[i].x, tabs[i].y + 120,
+      tabs[i].width, 'center'
+    )
+
+    love.graphics.setFont(smallfont)
+    love.graphics.printf(tabs[i].subtitle,
+      global.x + stack_height + tabs[i].x, tabs[i].y + 200,
+      tabs[i].width, 'center'
+    )
+
     stack_height = stack_height + tabs[i].width
   end
 
+  love.graphics.setFont(font)
   for i=1,#games do
     love.graphics.setColor(255, 255, 255)
     love.graphics.print(games[i].title, 300, games[i].y + 20)
