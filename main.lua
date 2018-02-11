@@ -41,6 +41,10 @@ cursor = {
   alpha = 255
 }
 
+game_details = {
+  y = SCREEN_HEIGHT
+}
+
 tabs = {
   { title="Settings", subtitle="Configure Lakka", title_alpha=255, width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
   { bg = love.graphics.newImage('bg/Nintendo - Game Boy.png'), title="Game Boy", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Nintendo - Game Boy.png'), zoom=PASSIVE_TAB_ZOOM},
@@ -101,6 +105,7 @@ function love.load()
   love.graphics.setBackgroundColor(tabs[1].color)
   font = love.graphics.newFont('font.ttf', 40)
   smallfont = love.graphics.newFont('font.ttf', 25)
+  thumbnail = love.graphics.newImage('thumbnails/After Burner Complete (Europe).png')
   flags = {}
   flags['Japan'] = love.graphics.newImage('flags/Japan.png')
   flags['Europe'] = love.graphics.newImage('flags/Europe.png')
@@ -212,6 +217,7 @@ function toGame()
   tween(0.2, tabs[ACTIVE_TAB],  { y = 80, zoom = 0.5 }, 'outSine')
   tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 0 }, 'outSine')
   tween(0.2, cursor,  { alpha = 0 }, 'outSine')
+  tween(0.2, game_details,  { y = 150 }, 'outSine')
 end
 
 function love.update(dt)
@@ -384,4 +390,9 @@ function love.draw()
   draw_cursor()
 
   draw_games()
+
+  love.graphics.setColor(0, 0, 0, 50)
+  love.graphics.rectangle('fill', 0, game_details.y, 1920, SCREEN_HEIGHT)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.draw(thumbnail, 300, game_details.y + 60, 0, 1.5)
 end
