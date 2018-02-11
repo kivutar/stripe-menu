@@ -26,8 +26,8 @@ AFTER_X = 22
 
 HIDDEN_GAME_Y = SCREEN_HEIGHT + 100
 ACTIVE_GAME_Y = SCREEN_HEIGHT / 2
-BEFORE_GAME_Y = SCREEN_HEIGHT / 2 - 130
-AFTER_GAME_Y = SCREEN_HEIGHT / 2 + 130
+BEFORE_GAME_Y = SCREEN_HEIGHT / 2 - 140
+AFTER_GAME_Y = SCREEN_HEIGHT / 2 + 140
 
 global = {
   x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH
@@ -51,18 +51,18 @@ for i=1,#tabs do
 end
 
 games = {
-  { y=HIDDEN_GAME_Y, title='Game 1 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 2 - With another title' },
-  { y=HIDDEN_GAME_Y, title='Game 3 - With a medium title' },
-  { y=HIDDEN_GAME_Y, title='Game 4 - Quite short' },
-  { y=HIDDEN_GAME_Y, title='Game 5 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 6 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 7 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 8 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 9 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 11 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 12 - With a pretty long title' },
-  { y=HIDDEN_GAME_Y, title='Game 13 - With a pretty long title' },
+  { y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
+  { y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
+  { y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
+  { y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
+  { y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
+  { y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
+  { y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
+  { y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
+  { y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
+  { y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
+  { y=HIDDEN_GAME_Y, title='Doom (Europe)' },
+  { y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
 }
 
 function love.load()
@@ -119,6 +119,7 @@ function updateGames()
 end
 
 function openTab()
+  ACTIVE_GAME = 1
   for i=1,#tabs do
     if i == ACTIVE_TAB then
       tab_width = ACTIVE_TAB_WIDTH*4
