@@ -154,10 +154,10 @@ function updateGames()
       next_y = AFTER_GAME_Y
       next_flag_alpha = 0
     end
-    tween(0.2, games[i],  { y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80 }, 'outSine')
-    tween(0.2, games[i],  { flag_alpha = next_flag_alpha }, 'outSine')
+    tween(0.15, games[i],  { y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80 }, 'outSine')
+    tween(0.15, games[i],  { flag_alpha = next_flag_alpha }, 'outSine')
   end
-  tween(0.2, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
+  tween(0.15, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
 end
 
 function openTab()
@@ -226,7 +226,7 @@ function love.update(dt)
     OPEN = false
   end
 
-  if OPEN and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.25 then
+  if OPEN and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME + 1
     if ACTIVE_GAME > #games then
@@ -236,7 +236,7 @@ function love.update(dt)
     updateGames()
   end
 
-  if OPEN and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.25 then
+  if OPEN and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 then
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME - 1
     if ACTIVE_GAME < 1 then
@@ -308,13 +308,13 @@ function draw_cursor()
   love.graphics.setColor(255, 255, 255)
 
   love.graphics.push()
-  love.graphics.translate(164, cursor.y)
+  love.graphics.translate(208, cursor.y)
   love.graphics.rotate(t)
   love.graphics.rectangle('fill', -15, -15, 30, 30)
   love.graphics.pop()
 
   love.graphics.push()
-  love.graphics.translate(164, cursor.y)
+  love.graphics.translate(208, cursor.y)
   love.graphics.rotate(t + math.pi/4)
   love.graphics.rectangle('fill', -15, -15, 30, 30)
   love.graphics.pop()
@@ -339,7 +339,7 @@ function draw_games()
     if games[i].mark then
       love.graphics.setFont(smallfont)
       love.graphics.setColor(255, 255, 255, 128)
-      love.graphics.print(games[i].mark, 156, games[i].y + 56)
+      love.graphics.print(games[i].mark, 200, games[i].y + 56)
     end
   end
 end
