@@ -35,7 +35,8 @@ global = {
 }
 
 cursor = {
-  y = HIDDEN_GAME_Y
+  y = HIDDEN_GAME_Y,
+  width = 0
 }
 
 tabs = {
@@ -158,6 +159,10 @@ function updateGames()
     tween(0.15, games[i],  { flag_alpha = next_flag_alpha }, 'outSine')
   end
   tween(0.15, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
+
+  local new_width = font:getWidth(games[ACTIVE_GAME].title) + 170
+  new_width = new_width + 71 * #games[ACTIVE_GAME].flags
+  tween(0.15, cursor,  { width = new_width }, 'outSine')
 end
 
 function openTab()
@@ -305,7 +310,7 @@ function draw_tabs()
 end
 
 function draw_cursor()
-  love.graphics.setColor(255, 255, 255)
+  love.graphics.setColor(255, 255, 255, 255)
 
   love.graphics.push()
   love.graphics.translate(208, cursor.y)
@@ -318,9 +323,16 @@ function draw_cursor()
   love.graphics.rotate(t + math.pi/4)
   love.graphics.rectangle('fill', -15, -15, 30, 30)
   love.graphics.pop()
+
+  local a = (math.cos(t*5)+1) * 128 + 128
+  love.graphics.setColor(255, 255, 255, a)
+  love.graphics.rectangle('line', 160, cursor.y - 50, cursor.width, 100)
+  love.graphics.setColor(255, 255, 255, 16)
+  love.graphics.rectangle('fill', 160, cursor.y - 50, cursor.width, 100)
 end
 
 function draw_games()
+
   for i=1,#games do
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255)
