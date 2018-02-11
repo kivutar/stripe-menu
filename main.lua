@@ -37,7 +37,8 @@ global = {
 
 cursor = {
   y = HIDDEN_GAME_Y,
-  width = 0
+  width = 0,
+  alpha = 255
 }
 
 tabs = {
@@ -58,18 +59,18 @@ for i=1,#tabs do
 end
 
 games = {
-  { flags={}, y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Doom (Europe)' },
-  { flags={}, y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Europe)' },
+  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
 }
 
 function mark_games()
@@ -197,6 +198,22 @@ function toGameList()
   animateGameList()
 end
 
+function toGame()
+  for i=1,#games do
+    if i == ACTIVE_GAME then
+      next_y = 0
+    else
+      next_y = HIDDEN_GAME_Y
+    end
+    tween(0.2, games[i],  { y = next_y }, 'outSine')
+    tween(0.2, games[i],  { mark_alpha = 0 }, 'outSine')
+  end
+
+  tween(0.2, tabs[ACTIVE_TAB],  { y = 80, zoom = 0.5 }, 'outSine')
+  tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 0 }, 'outSine')
+  tween(0.2, cursor,  { alpha = 0 }, 'outSine')
+end
+
 function love.update(dt)
   t = t + dt
 
@@ -222,14 +239,7 @@ function love.update(dt)
     animateTabs()
   end
 
-  if love.keyboard.isDown("return") and SCREEN == SCREEN_TABS then
-    t1 = love.timer.getTime()
-    toGameList()
-    SCREEN = SCREEN_GAMELIST
-  end
-
   if love.keyboard.isDown("backspace") and SCREEN == SCREEN_GAMELIST then
-    t1 = love.timer.getTime()
     animateTabs()
     SCREEN = SCREEN_TABS
   end
@@ -254,6 +264,18 @@ function love.update(dt)
     animateGameList()
   end
 
+end
+
+function love.keypressed(key)
+  if key == 'escape' then
+    love.event.quit()
+  elseif key == 'return' and SCREEN == SCREEN_TABS then
+    toGameList()
+    SCREEN = SCREEN_GAMELIST
+  elseif key == 'return' and SCREEN == SCREEN_GAMELIST then
+    toGame()
+    SCREEN = SCREEN_GAME
+  end
 end
 
 function draw_tabs()
@@ -313,7 +335,7 @@ function draw_tabs()
 end
 
 function draw_cursor()
-  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setColor(255, 255, 255, cursor.alpha)
 
   love.graphics.push()
   love.graphics.translate(208, cursor.y)
@@ -328,9 +350,9 @@ function draw_cursor()
   love.graphics.pop()
 
   local a = (math.cos(t*5)+1) * 128 + 128
-  love.graphics.setColor(255, 255, 255, a)
+  love.graphics.setColor(255, 255, 255, math.min(a, cursor.alpha))
   love.graphics.rectangle('line', 160, cursor.y - 50, cursor.width, 100)
-  love.graphics.setColor(255, 255, 255, 16)
+  love.graphics.setColor(255, 255, 255, math.min(16, cursor.alpha))
   love.graphics.rectangle('fill', 160, cursor.y - 50, cursor.width, 100)
 end
 
@@ -353,7 +375,7 @@ function draw_games()
 
     if games[i].mark then
       love.graphics.setFont(smallfont)
-      love.graphics.setColor(255, 255, 255, 128)
+      love.graphics.setColor(255, 255, 255, games[i].mark_alpha)
       love.graphics.print(games[i].mark, 200, games[i].y + 56)
     end
   end
