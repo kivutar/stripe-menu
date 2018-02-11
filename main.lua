@@ -223,7 +223,7 @@ function love.update(dt)
 end
 
 function draw_tabs()
-  local stack_height = 285
+  local stack_width = 285
 
   for i=1,#tabs do
     love.graphics.setColor(128, 128, 128, 255)
@@ -231,10 +231,10 @@ function draw_tabs()
     if i > 1 then
       local function myStencilFunction()
         love.graphics.polygon("fill",
-          global.x + stack_height+ANGLE, 0,
-          global.x + stack_height+tabs[i].width+ANGLE, 0,
-          global.x + stack_height+tabs[i].width, SCREEN_HEIGHT,
-          global.x + stack_height, SCREEN_HEIGHT
+          global.x + stack_width+ANGLE, 0,
+          global.x + stack_width+tabs[i].width+ANGLE, 0,
+          global.x + stack_width+tabs[i].width, SCREEN_HEIGHT,
+          global.x + stack_width, SCREEN_HEIGHT
         )
       end
 
@@ -246,16 +246,16 @@ function draw_tabs()
 
     love.graphics.setColor(tabs[i].color)
     love.graphics.polygon("fill",
-      global.x + stack_height+ANGLE, 0,
-      global.x + stack_height+tabs[i].width+ANGLE, 0,
-      global.x + stack_height+tabs[i].width, SCREEN_HEIGHT,
-      global.x + stack_height, SCREEN_HEIGHT
+      global.x + stack_width+ANGLE, 0,
+      global.x + stack_width+tabs[i].width+ANGLE, 0,
+      global.x + stack_width+tabs[i].width, SCREEN_HEIGHT,
+      global.x + stack_width, SCREEN_HEIGHT
     )
 
     love.graphics.setColor(255, 255, 255, 255)
 
     love.graphics.draw(tabs[i].icon,
-      global.x + stack_height + tabs[i].width/2 + tabs[i].x, tabs[i].y,
+      global.x + stack_width + tabs[i].width/2 + tabs[i].x, tabs[i].y,
       0, tabs[i].zoom, tabs[i].zoom,
       128, 128
     )
@@ -264,17 +264,17 @@ function draw_tabs()
 
     love.graphics.setFont(font)
     love.graphics.printf(tabs[i].title,
-      global.x + stack_height + tabs[i].x, tabs[i].y + 120,
+      global.x + stack_width + tabs[i].x, tabs[i].y + 120,
       tabs[i].width, 'center'
     )
 
     love.graphics.setFont(smallfont)
     love.graphics.printf(tabs[i].subtitle,
-      global.x + stack_height + tabs[i].x, tabs[i].y + 200,
+      global.x + stack_width + tabs[i].x, tabs[i].y + 200,
       tabs[i].width, 'center'
     )
 
-    stack_height = stack_height + tabs[i].width
+    stack_width = stack_width + tabs[i].width
   end
 end
 
