@@ -101,6 +101,8 @@ function love.load()
   flags['Japan'] = love.graphics.newImage('flags/Japan.png')
   flags['Europe'] = love.graphics.newImage('flags/Europe.png')
   flags['USA'] = love.graphics.newImage('flags/USA.png')
+  flags['Fr'] = love.graphics.newImage('flags/Fr.png')
+  flags['Es'] = love.graphics.newImage('flags/Es.png')
   mark_games()
   flag_games()
 end
