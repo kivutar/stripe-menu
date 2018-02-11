@@ -9,7 +9,8 @@ ACTIVE_TAB = 1
 ACTIVE_GAME = 1
 t = 0
 t1 = 0
-OPEN=false
+local SCREEN_TABS, SCREEN_GAMELIST, SCREEN_GAME = 0, 1, 2
+SCREEN = SCREEN_TABS
 
 PASSIVE_TAB_WIDTH = 128
 ACTIVE_TAB_WIDTH = 1200
@@ -201,7 +202,7 @@ function love.update(dt)
 
   tween.update(dt)
 
-  if not OPEN and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
+  if SCREEN == SCREEN_TABS and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
     t1 = love.timer.getTime()
     ACTIVE_TAB = ACTIVE_TAB + 1
     if ACTIVE_TAB > #tabs then
@@ -211,7 +212,7 @@ function love.update(dt)
     updateTabs()
   end
 
-  if not OPEN and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
+  if SCREEN == SCREEN_TABS and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
     t1 = love.timer.getTime()
     ACTIVE_TAB = ACTIVE_TAB - 1
     if ACTIVE_TAB < 1 then
@@ -221,19 +222,19 @@ function love.update(dt)
     updateTabs()
   end
 
-  if love.keyboard.isDown("return") and not OPEN then
+  if love.keyboard.isDown("return") and SCREEN == SCREEN_TABS then
     t1 = love.timer.getTime()
     openTab()
-    OPEN = true
+    SCREEN = SCREEN_GAMELIST
   end
 
-  if love.keyboard.isDown("backspace") and OPEN then
+  if love.keyboard.isDown("backspace") and SCREEN == SCREEN_GAMELIST then
     t1 = love.timer.getTime()
     updateTabs()
-    OPEN = false
+    SCREEN = SCREEN_TABS
   end
 
-  if OPEN and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
+  if SCREEN == SCREEN_GAMELIST  and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME + 1
     if ACTIVE_GAME > #games then
@@ -243,7 +244,7 @@ function love.update(dt)
     updateGames()
   end
 
-  if OPEN and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 then
+  if SCREEN == SCREEN_GAMELIST  and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 then
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME - 1
     if ACTIVE_GAME < 1 then
