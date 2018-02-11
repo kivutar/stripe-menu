@@ -222,6 +222,7 @@ end
 function gameToGamelist()
   for i=1,#games do
     tween(0.2, games[i],  { alpha = 255 }, 'outSine')
+    tween(0.2, games[i],  { mark_alpha = 128 }, 'outSine')
   end
 
   tween(0.2, tabs[ACTIVE_TAB],  { y = ACTIVE_Y, zoom = ACTIVE_TAB_ZOOM }, 'outSine')
