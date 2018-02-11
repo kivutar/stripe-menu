@@ -89,6 +89,7 @@ function flag_games()
       end
     end
     games[i].title = games[i].title:gsub("%s%((.-)%)", '')
+    games[i].flag_alpha = 0
   end
 end
 
@@ -145,12 +146,16 @@ function updateGames()
   for i=1,#games do
     if i == ACTIVE_GAME then
       game_y = ACTIVE_GAME_Y
+      game_flag_alpha = 255
     elseif i < ACTIVE_GAME then
       game_y = BEFORE_GAME_Y
+      game_flag_alpha = 0
     else
       game_y = AFTER_GAME_Y
+      game_flag_alpha = 0
     end
     tween(0.2, games[i],  { y = -ACTIVE_GAME * 80 + game_y + (i - 1) * 80 }, 'outSine')
+    tween(0.2, games[i],  { flag_alpha = game_flag_alpha }, 'outSine')
   end
   tween(0.2, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
 end
@@ -321,6 +326,7 @@ function draw_games()
     love.graphics.setColor(255, 255, 255)
     love.graphics.print(games[i].title, 300, games[i].y + 45)
 
+    love.graphics.setColor(255, 255, 255, games[i].flag_alpha)
     local stack_width = 20
     local title_width = font:getWidth(games[i].title)
     for f=1,#games[i].flags do
