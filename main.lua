@@ -168,7 +168,7 @@ function updateGames()
   tween(0.15, cursor,  { width = new_width }, 'outSine')
 end
 
-function openTab()
+function toGameList()
   ACTIVE_GAME = 1
   for i=1,#tabs do
     if i == ACTIVE_TAB then
@@ -224,7 +224,7 @@ function love.update(dt)
 
   if love.keyboard.isDown("return") and SCREEN == SCREEN_TABS then
     t1 = love.timer.getTime()
-    openTab()
+    toGameList()
     SCREEN = SCREEN_GAMELIST
   end
 
