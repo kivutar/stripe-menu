@@ -63,18 +63,18 @@ for i=1,#tabs do
 end
 
 games = {
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Europe)' },
-  { flags={}, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Europe)' },
+  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
 }
 
 function mark_games()
@@ -206,11 +206,10 @@ end
 function toGame()
   for i=1,#games do
     if i == ACTIVE_GAME then
-      next_y = 0
+      tween(0.2, games[i],  { y = 0 }, 'outSine')
     else
-      next_y = HIDDEN_GAME_Y
+      tween(0.2, games[i],  { alpha = 0 }, 'outSine')
     end
-    tween(0.2, games[i],  { y = next_y }, 'outSine')
     tween(0.2, games[i],  { mark_alpha = 0 }, 'outSine')
   end
 
@@ -363,7 +362,7 @@ end
 function draw_games()
   for i=1,#games do
     love.graphics.setFont(font)
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(255, 255, 255, games[i].alpha)
     love.graphics.print(games[i].title, 300, games[i].y + 45)
 
     love.graphics.setColor(255, 255, 255, games[i].flag_alpha)
