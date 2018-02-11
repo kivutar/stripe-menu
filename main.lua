@@ -34,6 +34,10 @@ global = {
   x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH
 }
 
+cursor = {
+  y = HIDDEN_GAME_Y
+}
+
 tabs = {
   { title="Settings", subtitle="Configure Lakka", title_alpha=255, width=ACTIVE_TAB_WIDTH,  x=ACTIVE_X, y=ACTIVE_Y, icon=love.graphics.newImage('png/setting.png'), zoom=ACTIVE_TAB_ZOOM},
   { bg = love.graphics.newImage('bg/Nintendo - Game Boy.png'), title="Game Boy", subtitle="13 Games - 3 Favorites", title_alpha=0, width=PASSIVE_TAB_WIDTH, x=AFTER_X, y=AFTER_Y, icon=love.graphics.newImage('png/Nintendo - Game Boy.png'), zoom=PASSIVE_TAB_ZOOM},
@@ -113,6 +117,7 @@ function updateTabs()
   for i=1,#games do
     tween(0.2, games[i],  { y = HIDDEN_GAME_Y }, 'outSine')
   end
+  tween(0.2, cursor,  { y = HIDDEN_GAME_Y }, 'outSine')
 end
 
 function updateGames()
@@ -126,6 +131,7 @@ function updateGames()
     end
     tween(0.2, games[i],  { y = -ACTIVE_GAME * 80 + game_y + (i - 1) * 80 }, 'outSine')
   end
+  tween(0.2, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
 end
 
 function openTab()
@@ -216,8 +222,8 @@ function love.update(dt)
 
 end
 
-function love.draw()
-  stack_height = 285
+function draw_tabs()
+  local stack_height = 285
 
   for i=1,#tabs do
     love.graphics.setColor(128, 128, 128, 255)
@@ -270,21 +276,25 @@ function love.draw()
 
     stack_height = stack_height + tabs[i].width
   end
+end
 
-  if OPEN then
-    love.graphics.setColor(255, 255, 255)
-    love.graphics.push()
-    love.graphics.translate(164, 538)
-    love.graphics.rotate(t)
-    love.graphics.rectangle('fill', -15, -15, 30, 30)
-    love.graphics.pop()
-    love.graphics.push()
-    love.graphics.translate(164, 538)
-    love.graphics.rotate(t + math.pi/4)
-    love.graphics.rectangle('fill', -15, -15, 30, 30)
-    love.graphics.pop()
-  end
+function draw_cursor()
+  love.graphics.setColor(255, 255, 255)
 
+  love.graphics.push()
+  love.graphics.translate(164, cursor.y)
+  love.graphics.rotate(t)
+  love.graphics.rectangle('fill', -15, -15, 30, 30)
+  love.graphics.pop()
+
+  love.graphics.push()
+  love.graphics.translate(164, cursor.y)
+  love.graphics.rotate(t + math.pi/4)
+  love.graphics.rectangle('fill', -15, -15, 30, 30)
+  love.graphics.pop()
+end
+
+function draw_games()
   for i=1,#games do
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255)
@@ -296,4 +306,12 @@ function love.draw()
       love.graphics.print(games[i].mark, 156, games[i].y + 56)
     end
   end
+end
+
+function love.draw()
+  draw_tabs()
+
+  draw_cursor()
+
+  draw_games()
 end
