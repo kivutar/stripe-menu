@@ -145,17 +145,17 @@ end
 function updateGames()
   for i=1,#games do
     if i == ACTIVE_GAME then
-      game_y = ACTIVE_GAME_Y
-      game_flag_alpha = 255
+      next_y = ACTIVE_GAME_Y
+      next_flag_alpha = 255
     elseif i < ACTIVE_GAME then
-      game_y = BEFORE_GAME_Y
-      game_flag_alpha = 0
+      next_y = BEFORE_GAME_Y
+      next_flag_alpha = 0
     else
-      game_y = AFTER_GAME_Y
-      game_flag_alpha = 0
+      next_y = AFTER_GAME_Y
+      next_flag_alpha = 0
     end
-    tween(0.2, games[i],  { y = -ACTIVE_GAME * 80 + game_y + (i - 1) * 80 }, 'outSine')
-    tween(0.2, games[i],  { flag_alpha = game_flag_alpha }, 'outSine')
+    tween(0.2, games[i],  { y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80 }, 'outSine')
+    tween(0.2, games[i],  { flag_alpha = next_flag_alpha }, 'outSine')
   end
   tween(0.2, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
 end
@@ -164,25 +164,25 @@ function openTab()
   ACTIVE_GAME = 1
   for i=1,#tabs do
     if i == ACTIVE_TAB then
-      tab_width = ACTIVE_TAB_WIDTH*4
-      tab_zoom = ACTIVE_TAB_ZOOM
-      tab_y = ACTIVE_Y
-      tab_x = ACTIVE_X
+      next_width = ACTIVE_TAB_WIDTH*4
+      next_zoom = ACTIVE_TAB_ZOOM
+      next_y = ACTIVE_Y
+      next_x = ACTIVE_X
     else
-      tab_width = 0
-      tab_zoom = 0
+      next_width = 0
+      next_zoom = 0
       if i < ACTIVE_TAB then
-        tab_y = BEFORE_Y
-        tab_x = BEFORE_X
+        next_y = BEFORE_Y
+        next_x = BEFORE_X
       else
-        tab_y = AFTER_Y
-        tab_x = AFTER_X
+        next_y = AFTER_Y
+        next_x = AFTER_X
       end
     end
-    tween(0.2, tabs[i],  { width = tab_width }, 'outSine')
-    tween(0.2, tabs[i],  { zoom = tab_zoom }, 'outSine')
-    tween(0.2, tabs[i],  { y = tab_y }, 'outSine')
-    tween(0.2, tabs[i],  { x = tab_x }, 'outSine')
+    tween(0.2, tabs[i],  { width = next_width }, 'outSine')
+    tween(0.2, tabs[i],  { zoom = next_zoom }, 'outSine')
+    tween(0.2, tabs[i],  { y = next_y }, 'outSine')
+    tween(0.2, tabs[i],  { x = next_x }, 'outSine')
     tween(0.2, global,  { x = -1300 }, 'outSine')
   end
 
