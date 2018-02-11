@@ -7,6 +7,7 @@ SCREEN_HEIGHT = 1080
 ANGLE = 400
 ACTIVE_TAB = 1
 ACTIVE_GAME = 1
+t = 0
 t1 = 0
 OPEN=false
 
@@ -64,6 +65,15 @@ games = {
   { y=HIDDEN_GAME_Y, title='Doom (Europe)' },
   { y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
 }
+
+mark = ''
+for i=1,#games do
+  first = string.sub(games[i].title, 1, 1)
+  if first ~= mark then
+    mark = first
+    games[i].mark = mark
+  end
+end
 
 function love.load()
   love.window.setMode(1920/2, SCREEN_HEIGHT/2, {highdpi = true, msaa = 2})
@@ -148,6 +158,8 @@ function openTab()
 end
 
 function love.update(dt)
+  t = t + dt
+
   tween.update(dt)
 
   if not OPEN and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
@@ -234,7 +246,6 @@ function love.draw()
       global.x + stack_height, SCREEN_HEIGHT
     )
 
-    love.graphics.setColorMask(255, 255, 255, 255)
     love.graphics.setColor(255, 255, 255, 255)
 
     love.graphics.draw(tabs[i].icon,
@@ -260,9 +271,29 @@ function love.draw()
     stack_height = stack_height + tabs[i].width
   end
 
-  love.graphics.setFont(font)
+  if OPEN then
+    love.graphics.setColor(255, 255, 255)
+    love.graphics.push()
+    love.graphics.translate(164, 538)
+    love.graphics.rotate(t)
+    love.graphics.rectangle('fill', -15, -15, 30, 30)
+    love.graphics.pop()
+    love.graphics.push()
+    love.graphics.translate(164, 538)
+    love.graphics.rotate(t + math.pi/4)
+    love.graphics.rectangle('fill', -15, -15, 30, 30)
+    love.graphics.pop()
+  end
+
   for i=1,#games do
+    love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255)
     love.graphics.print(games[i].title, 300, games[i].y + 45)
+
+    if games[i].mark then
+      love.graphics.setFont(smallfont)
+      love.graphics.setColor(255, 255, 255, 128)
+      love.graphics.print(games[i].mark, 156, games[i].y + 56)
+    end
   end
 end
