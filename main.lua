@@ -174,7 +174,7 @@ function animateGameList()
   tween(0.15, cursor,  { width = new_width }, 'outSine')
 end
 
-function toGameList()
+function tabsToGameList()
   ACTIVE_GAME = 1
   for i=1,#tabs do
     if i == ACTIVE_TAB then
@@ -203,7 +203,7 @@ function toGameList()
   animateGameList()
 end
 
-function toGame()
+function gamelistToGame()
   for i=1,#games do
     if i == ACTIVE_GAME then
       tween(0.2, games[i],  { y = 0 }, 'outSine')
@@ -217,6 +217,19 @@ function toGame()
   tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 0 }, 'outSine')
   tween(0.2, cursor,  { alpha = 0 }, 'outSine')
   tween(0.2, game_details,  { y = 150 }, 'outSine')
+end
+
+function gameToGamelist()
+  for i=1,#games do
+    tween(0.2, games[i],  { alpha = 255 }, 'outSine')
+  end
+
+  tween(0.2, tabs[ACTIVE_TAB],  { y = ACTIVE_Y, zoom = ACTIVE_TAB_ZOOM }, 'outSine')
+  tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 255 }, 'outSine')
+  tween(0.2, cursor,  { alpha = 255 }, 'outSine')
+  tween(0.2, game_details,  { y = SCREEN_HEIGHT }, 'outSine')
+
+  animateGameList()
 end
 
 function love.update(dt)
@@ -270,14 +283,17 @@ function love.keypressed(key)
   if key == 'escape' then
     love.event.quit()
   elseif key == 'return' and SCREEN == SCREEN_TABS then
-    toGameList()
+    tabsToGameList()
     SCREEN = SCREEN_GAMELIST
   elseif key == 'return' and SCREEN == SCREEN_GAMELIST then
-    toGame()
+    gamelistToGame()
     SCREEN = SCREEN_GAME
   elseif key == 'backspace' and SCREEN == SCREEN_GAMELIST then
     animateTabs()
     SCREEN = SCREEN_TABS
+  elseif key == 'backspace' and SCREEN == SCREEN_GAME then
+    gameToGamelist()
+    SCREEN = SCREEN_GAMELIST
   end
 end
 
