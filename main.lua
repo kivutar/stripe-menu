@@ -112,7 +112,7 @@ function love.load()
   flag_games()
 end
 
-function updateTabs()
+function animateTabs()
   for i=1,#tabs do
     if i == ACTIVE_TAB then
       tab_width = ACTIVE_TAB_WIDTH
@@ -146,7 +146,7 @@ function updateTabs()
   tween(0.2, cursor,  { y = HIDDEN_GAME_Y }, 'outSine')
 end
 
-function updateGames()
+function animateGameList()
   for i=1,#games do
     if i == ACTIVE_GAME then
       next_y = ACTIVE_GAME_Y
@@ -194,7 +194,7 @@ function toGameList()
     tween(0.2, global,  { x = -1300 }, 'outSine')
   end
 
-  updateGames()
+  animateGameList()
 end
 
 function love.update(dt)
@@ -209,7 +209,7 @@ function love.update(dt)
       ACTIVE_TAB = 1
     end
 
-    updateTabs()
+    animateTabs()
   end
 
   if SCREEN == SCREEN_TABS and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
@@ -219,7 +219,7 @@ function love.update(dt)
       ACTIVE_TAB = #tabs
     end
 
-    updateTabs()
+    animateTabs()
   end
 
   if love.keyboard.isDown("return") and SCREEN == SCREEN_TABS then
@@ -230,7 +230,7 @@ function love.update(dt)
 
   if love.keyboard.isDown("backspace") and SCREEN == SCREEN_GAMELIST then
     t1 = love.timer.getTime()
-    updateTabs()
+    animateTabs()
     SCREEN = SCREEN_TABS
   end
 
@@ -241,7 +241,7 @@ function love.update(dt)
       ACTIVE_GAME = 1
     end
 
-    updateGames()
+    animateGameList()
   end
 
   if SCREEN == SCREEN_GAMELIST  and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 then
@@ -251,7 +251,7 @@ function love.update(dt)
       ACTIVE_GAME = #games
     end
 
-    updateGames()
+    animateGameList()
   end
 
 end
