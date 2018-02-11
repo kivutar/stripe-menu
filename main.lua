@@ -116,28 +116,28 @@ end
 function animateTabs()
   for i=1,#tabs do
     if i == ACTIVE_TAB then
-      tab_width = ACTIVE_TAB_WIDTH
-      tab_zoom = ACTIVE_TAB_ZOOM
-      tab_y = ACTIVE_Y
-      tab_x = ACTIVE_X
-      tab_title_alpha = 255
+      next_width = ACTIVE_TAB_WIDTH
+      next_zoom = ACTIVE_TAB_ZOOM
+      next_y = ACTIVE_Y
+      next_x = ACTIVE_X
+      next_title_alpha = 255
     else
-      tab_width = PASSIVE_TAB_WIDTH
-      tab_zoom = PASSIVE_TAB_ZOOM
-      tab_title_alpha = 0
+      next_width = PASSIVE_TAB_WIDTH
+      next_zoom = PASSIVE_TAB_ZOOM
+      next_title_alpha = 0
       if i < ACTIVE_TAB then
-        tab_y = BEFORE_Y
-        tab_x = BEFORE_X
+        next_y = BEFORE_Y
+        next_x = BEFORE_X
       else
-        tab_y = AFTER_Y
-        tab_x = AFTER_X
+        next_y = AFTER_Y
+        next_x = AFTER_X
       end
     end
-    tween(0.2, tabs[i],  { width = tab_width }, 'outSine')
-    tween(0.2, tabs[i],  { zoom = tab_zoom }, 'outSine')
-    tween(0.2, tabs[i],  { y = tab_y }, 'outSine')
-    tween(0.2, tabs[i],  { x = tab_x }, 'outSine')
-    tween(0.2, tabs[i],  { title_alpha = tab_title_alpha }, 'outSine')
+    tween(0.2, tabs[i],  { width = next_width }, 'outSine')
+    tween(0.2, tabs[i],  { zoom = next_zoom }, 'outSine')
+    tween(0.2, tabs[i],  { y = next_y }, 'outSine')
+    tween(0.2, tabs[i],  { x = next_x }, 'outSine')
+    tween(0.2, tabs[i],  { title_alpha = next_title_alpha }, 'outSine')
     tween(0.2, global,  { x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH }, 'outSine')
   end
 
@@ -239,11 +239,6 @@ function love.update(dt)
     animateTabs()
   end
 
-  if love.keyboard.isDown("backspace") and SCREEN == SCREEN_GAMELIST then
-    animateTabs()
-    SCREEN = SCREEN_TABS
-  end
-
   if SCREEN == SCREEN_GAMELIST  and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME + 1
@@ -275,6 +270,9 @@ function love.keypressed(key)
   elseif key == 'return' and SCREEN == SCREEN_GAMELIST then
     toGame()
     SCREEN = SCREEN_GAME
+  elseif key == 'backspace' and SCREEN == SCREEN_GAMELIST then
+    animateTabs()
+    SCREEN = SCREEN_TABS
   end
 end
 
@@ -357,7 +355,6 @@ function draw_cursor()
 end
 
 function draw_games()
-
   for i=1,#games do
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255)
