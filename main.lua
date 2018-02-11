@@ -56,26 +56,39 @@ for i=1,#tabs do
 end
 
 games = {
-  { y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
-  { y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
-  { y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
-  { y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
-  { y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
-  { y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
-  { y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
-  { y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
-  { y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
-  { y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
-  { y=HIDDEN_GAME_Y, title='Doom (Europe)' },
-  { y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Doom (Europe)' },
+  { flags={}, y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
 }
 
-mark = ''
-for i=1,#games do
-  first = string.sub(games[i].title, 1, 1)
-  if first ~= mark then
-    mark = first
-    games[i].mark = mark
+function mark_games()
+  mark = ''
+  for i=1,#games do
+    first = string.sub(games[i].title, 1, 1)
+    if first ~= mark then
+      mark = first
+      games[i].mark = mark
+    end
+  end
+end
+
+function flag_games()
+  for i=1,#games do
+    for capture in games[i].title:gmatch("%s%((.-)%)") do
+      for word in capture:gmatch('([^, ]+)') do
+        table.insert(games[i].flags, word)
+      end
+    end
+    games[i].title = games[i].title:gsub("%s%((.-)%)", '')
   end
 end
 
@@ -84,6 +97,12 @@ function love.load()
   love.graphics.setBackgroundColor(tabs[1].color)
   font = love.graphics.newFont('font.ttf', 40)
   smallfont = love.graphics.newFont('font.ttf', 25)
+  flags = {}
+  flags['Japan'] = love.graphics.newImage('flags/Japan.png')
+  flags['Europe'] = love.graphics.newImage('flags/Europe.png')
+  flags['USA'] = love.graphics.newImage('flags/USA.png')
+  mark_games()
+  flag_games()
 end
 
 function updateTabs()
@@ -299,6 +318,15 @@ function draw_games()
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255)
     love.graphics.print(games[i].title, 300, games[i].y + 45)
+
+    local stack_width = 20
+    local title_width = font:getWidth(games[i].title)
+    for f=1,#games[i].flags do
+      if flags[games[i].flags[f]] then
+        love.graphics.draw(flags[games[i].flags[f]], 300 + title_width + stack_width, games[i].y + 58)
+        stack_width = stack_width + 71
+      end
+    end
 
     if games[i].mark then
       love.graphics.setFont(smallfont)
