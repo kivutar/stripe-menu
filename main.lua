@@ -59,7 +59,7 @@ tabs = {
 }
 
 for i=1,#tabs do
-  tabs[i].color = {HSL((i-1)*30 % 255,128,128,140)}
+  tabs[i].color = {HSL((i-1)*20 % 256,128,128,140)}
 end
 
 games = {
@@ -314,26 +314,26 @@ function draw_tabs()
 
   for i=1,#tabs do
 
-    if i > 1 then
-      --love.graphics.setBlendMode('add')
-      --love.graphics.setShader(greyscale)
-      love.graphics.setColor(128, 128, 128, 255)
-      local function myStencilFunction()
-        love.graphics.polygon("fill",
-          global.x + stack_width+ANGLE, 0,
-          global.x + stack_width+tabs[i].width+ANGLE, 0,
-          global.x + stack_width+tabs[i].width, SCREEN_HEIGHT,
-          global.x + stack_width, SCREEN_HEIGHT
-        )
-      end
+    -- if i > 1 then
+    --   --love.graphics.setBlendMode('add')
+    --   love.graphics.setShader(greyscale)
+    --   love.graphics.setColor(40, 40, 40, 255)
+    --   local function myStencilFunction()
+    --     love.graphics.polygon("fill",
+    --       global.x + stack_width+ANGLE, 0,
+    --       global.x + stack_width+tabs[i].width+ANGLE, 0,
+    --       global.x + stack_width+tabs[i].width, SCREEN_HEIGHT,
+    --       global.x + stack_width, SCREEN_HEIGHT
+    --     )
+    --   end
 
-      love.graphics.stencil(myStencilFunction, "replace", 1)
-      love.graphics.setStencilTest("greater", 0)
-      love.graphics.draw(tabs[i].bg, 0, 0, 0, 1920/1280, 1080/720)
-      love.graphics.setStencilTest()
-      --love.graphics.setShader()
-      --love.graphics.setBlendMode('alpha')
-    end
+    --   love.graphics.stencil(myStencilFunction, "replace", 1)
+    --   love.graphics.setStencilTest("greater", 0)
+    --   love.graphics.draw(tabs[i].bg, 0, 0, 0, 1920/1280, 1080/720)
+    --   love.graphics.setStencilTest()
+    --   love.graphics.setShader()
+    --   --love.graphics.setBlendMode('alpha')
+    -- end
 
     love.graphics.setColor(tabs[i].color)
     love.graphics.polygon("fill",
