@@ -59,7 +59,7 @@ tabs = {
 }
 
 for i=1,#tabs do
-  tabs[i].color = {HSL((i-1)*30,128,128,140)}
+  tabs[i].color = {HSL((i-1)*30 % 255,128,128,140)}
 end
 
 games = {
@@ -116,6 +116,17 @@ function love.load()
   flags['De'] = love.graphics.newImage('flags/De.png')
   mark_games()
   flag_games()
+
+  greyscale = love.graphics.newShader[[
+    vec4 effect( vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords ){
+      vec4 pixel = Texel(texture, texture_coords );//This is the current pixel color
+      number average = (pixel.r+pixel.b+pixel.g)/3.0;
+      pixel.r = average;
+      pixel.g = average;
+      pixel.b = average;
+      return pixel;
+    }
+  ]]
 end
 
 function animateTabs()
@@ -302,9 +313,11 @@ function draw_tabs()
   local stack_width = 285
 
   for i=1,#tabs do
-    love.graphics.setColor(128, 128, 128, 255)
 
     if i > 1 then
+      --love.graphics.setBlendMode('add')
+      --love.graphics.setShader(greyscale)
+      love.graphics.setColor(128, 128, 128, 255)
       local function myStencilFunction()
         love.graphics.polygon("fill",
           global.x + stack_width+ANGLE, 0,
@@ -318,6 +331,8 @@ function draw_tabs()
       love.graphics.setStencilTest("greater", 0)
       love.graphics.draw(tabs[i].bg, 0, 0, 0, 1920/1280, 1080/720)
       love.graphics.setStencilTest()
+      --love.graphics.setShader()
+      --love.graphics.setBlendMode('alpha')
     end
 
     love.graphics.setColor(tabs[i].color)
