@@ -213,7 +213,7 @@ function gamelistToGame()
     tween(0.2, games[i],  { mark_alpha = 0 }, 'outSine')
   end
 
-  tween(0.2, tabs[ACTIVE_TAB],  { y = 80, zoom = 0.5 }, 'outSine')
+  tween(0.2, tabs[ACTIVE_TAB],  { y = 80, zoom = 0.25 }, 'outSine')
   tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 0 }, 'outSine')
   tween(0.2, cursor,  { alpha = 0 }, 'outSine')
   tween(0.2, game_details,  { y = 150 }, 'outSine')
@@ -369,11 +369,15 @@ function draw_cursor()
   love.graphics.rectangle('fill', -15, -15, 30, 30)
   love.graphics.pop()
 
+  love.graphics.setBlendMode('add')
+
   local a = (math.cos(t*5)+1) * 128 + 128
   love.graphics.setColor(255, 255, 255, math.min(a, cursor.alpha))
   love.graphics.rectangle('line', 160, cursor.y - 50, cursor.width, 100)
   love.graphics.setColor(255, 255, 255, math.min(16, cursor.alpha))
   love.graphics.rectangle('fill', 160, cursor.y - 50, cursor.width, 100)
+
+  love.graphics.setBlendMode('alpha')
 end
 
 function draw_games()
@@ -400,6 +404,33 @@ function draw_games()
   end
 end
 
+function draw_game()
+  love.graphics.setColor(0, 0, 0, 50)
+  love.graphics.rectangle('fill', 0, game_details.y, 1920, SCREEN_HEIGHT)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.draw(thumbnail, 300, game_details.y + 60, 0, 550/320)
+
+  love.graphics.print("Developer: Square", 915, game_details.y + 60)
+  love.graphics.print("Publisher: Sony", 915, game_details.y + 60 + 75*1)
+  love.graphics.print("Release Date: June 1984", 915, game_details.y + 60 + 75*2)
+  love.graphics.print("Rating: ★★★☆☆", 915, game_details.y + 60 + 75*3)
+  love.graphics.print("Players: 2", 915, game_details.y + 60 + 75*4)
+  love.graphics.print("Co-Op: Yes", 915, game_details.y + 60 + 75*5)
+  love.graphics.print("Genre: Action RPG", 915, game_details.y + 60 + 75*6)
+
+  love.graphics.setBlendMode('add')
+
+  local a = (math.cos(t*5)+1) * 128 + 128
+  love.graphics.setColor(255, 255, 255, math.min(a, 255))
+  love.graphics.rectangle('line', 300, game_details.y + 510, 550, 100)
+  love.graphics.setColor(255, 255, 255, 16)
+  love.graphics.rectangle('fill', 300, game_details.y + 510, 550, 100)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.print("▶ Run", 340, game_details.y + 524)
+
+  love.graphics.setBlendMode('alpha')
+end
+
 function love.draw()
   draw_tabs()
 
@@ -407,8 +438,5 @@ function love.draw()
 
   draw_games()
 
-  love.graphics.setColor(0, 0, 0, 50)
-  love.graphics.rectangle('fill', 0, game_details.y, 1920, SCREEN_HEIGHT)
-  love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.draw(thumbnail, 300, game_details.y + 60, 0, 1.5)
+  draw_game()
 end
