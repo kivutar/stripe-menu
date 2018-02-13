@@ -238,9 +238,7 @@ end
 
 function gamelistToGame()
   for i=1,#games do
-    if i == ACTIVE_GAME then
-      tween(0.2, games[i],  { y = 0 }, 'outSine')
-    else
+    if i ~= ACTIVE_GAME then
       tween(0.2, games[i],  { alpha = 0 }, 'outSine')
     end
     tween(0.2, games[i],  { mark_alpha = 0 }, 'outSine')
@@ -249,6 +247,7 @@ function gamelistToGame()
   tween(0.2, tabs[ACTIVE_TAB],  { y = 80, zoom = 0.25 }, 'outSine')
   tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 0 }, 'outSine')
   tween(0.2, cursor,  { alpha = 0 }, 'outSine')
+  tween(0.2, gamelist_container,  { y = - SCREEN_HEIGHT / 2 + 75 }, 'outSine')
   tween(0.2, gamedetails_container,  { y = 150 }, 'outSine')
 end
 
