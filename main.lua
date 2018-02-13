@@ -9,7 +9,7 @@ ACTIVE_TAB = 1
 ACTIVE_GAME = 1
 t = 0
 t1 = 0
-local SCREEN_TABS, SCREEN_GAMELIST, SCREEN_GAME = 0, 1, 2
+local SCREEN_TABS, SCREEN_GAMELIST, SCREEN_GAMEDETAILS = 0, 1, 2
 SCREEN = SCREEN_TABS
 
 PASSIVE_TAB_WIDTH = 128
@@ -299,11 +299,11 @@ function love.keypressed(key)
     SCREEN = SCREEN_GAMELIST
   elseif key == 'return' and SCREEN == SCREEN_GAMELIST then
     gamelistToGame()
-    SCREEN = SCREEN_GAME
+    SCREEN = SCREEN_GAMEDETAILS
   elseif key == 'backspace' and SCREEN == SCREEN_GAMELIST then
     animateTabs()
     SCREEN = SCREEN_TABS
-  elseif key == 'backspace' and SCREEN == SCREEN_GAME then
+  elseif key == 'backspace' and SCREEN == SCREEN_GAMEDETAILS then
     gameToGamelist()
     SCREEN = SCREEN_GAMELIST
   end
@@ -395,7 +395,7 @@ function draw_cursor()
   love.graphics.setBlendMode('alpha')
 end
 
-function draw_games()
+function draw_gamelist()
   for i=1,#games do
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255, games[i].alpha)
@@ -419,7 +419,7 @@ function draw_games()
   end
 end
 
-function draw_game()
+function draw_gamedetails()
   love.graphics.push()
 
   love.graphics.translate(0, game_details.y)
@@ -454,10 +454,7 @@ end
 
 function love.draw()
   draw_tabs()
-
   draw_cursor()
-
-  draw_games()
-
-  draw_game()
+  draw_gamelist()
+  draw_gamedetails()
 end
