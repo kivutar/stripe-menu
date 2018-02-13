@@ -31,18 +31,21 @@ ACTIVE_GAME_Y = SCREEN_HEIGHT / 2
 BEFORE_GAME_Y = SCREEN_HEIGHT / 2 - 140
 AFTER_GAME_Y = SCREEN_HEIGHT / 2 + 140
 
-global = {
+tabs_container = {
   x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH
 }
 
-cursor = {
-  y = HIDDEN_GAME_Y,
-  width = 0,
-  alpha = 255
+gamelist_container = {
+  y = SCREEN_HEIGHT / 2 + 100
 }
 
-game_details = {
+gamedetails_container = {
   y = SCREEN_HEIGHT
+}
+
+cursor = {
+  width = 0,
+  alpha = 255
 }
 
 tabs = {
@@ -63,19 +66,31 @@ for i=1,#tabs do
 end
 
 games = {
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete (Europe)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='After Burner Complete ~ After Burner (Japan, USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Amazing Spider-Man, The - Web of Fire (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='BC Racers (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Blackthorne (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Brutal Unleashed - Above the Claw (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cosmic Carnage (Europe)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Darxide (Europe) (En,Fr,De,Es)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Europe)' },
-  { flags={}, alpha=255, mark_alpha=128, y=HIDDEN_GAME_Y, title='Doom (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='After Burner Complete (Europe)' },
+  { flags={}, alpha=255, mark_alpha=128, title='After Burner Complete ~ After Burner (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Amazing Spider-Man, The - Web of Fire (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='BC Racers (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Blackthorne (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Brutal Unleashed - Above the Claw (USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Cosmic Carnage (Europe)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Darxide (Europe) (En,Fr,De,Es)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Doom (Europe)' },
+  { flags={}, alpha=255, mark_alpha=128, title='Doom (Japan, USA)' },
 }
+
+-- init games y
+for i=1,#games do
+  if i == ACTIVE_GAME then
+    next_y = ACTIVE_GAME_Y
+  elseif i < ACTIVE_GAME then
+    next_y = BEFORE_GAME_Y
+  else
+    next_y = AFTER_GAME_Y
+  end
+  games[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
+end
 
 function mark_games()
   mark = ''
@@ -154,13 +169,10 @@ function animateTabs()
     tween(0.2, tabs[i],  { y = next_y }, 'outSine')
     tween(0.2, tabs[i],  { x = next_x }, 'outSine')
     tween(0.2, tabs[i],  { title_alpha = next_title_alpha }, 'outSine')
-    tween(0.2, global,  { x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH }, 'outSine')
   end
 
-  for i=1,#games do
-    tween(0.2, games[i],  { y = HIDDEN_GAME_Y }, 'outSine')
-  end
-  tween(0.2, cursor,  { y = HIDDEN_GAME_Y }, 'outSine')
+  tween(0.2, tabs_container,  { x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH }, 'outSine')
+  tween(0.2, gamelist_container,  { y = SCREEN_HEIGHT / 2 + 100 }, 'outSine')
 end
 
 function animateGameList()
@@ -178,11 +190,11 @@ function animateGameList()
     tween(0.15, games[i],  { y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80 }, 'outSine')
     tween(0.15, games[i],  { flag_alpha = next_flag_alpha }, 'outSine')
   end
-  tween(0.15, cursor,  { y = ACTIVE_GAME_Y }, 'outSine')
 
   local new_width = font:getWidth(games[ACTIVE_GAME].title) + 170
   new_width = new_width + 71 * #games[ACTIVE_GAME].flags
   tween(0.15, cursor,  { width = new_width }, 'outSine')
+  tween(0.15, gamelist_container,  { y = 0 }, 'outSine')
 end
 
 function tabsToGameList()
@@ -208,7 +220,7 @@ function tabsToGameList()
     tween(0.2, tabs[i],  { zoom = next_zoom }, 'outSine')
     tween(0.2, tabs[i],  { y = next_y }, 'outSine')
     tween(0.2, tabs[i],  { x = next_x }, 'outSine')
-    tween(0.2, global,  { x = -1300 }, 'outSine')
+    tween(0.2, tabs_container,  { x = -1300 }, 'outSine')
   end
 
   animateGameList()
@@ -227,7 +239,7 @@ function gamelistToGame()
   tween(0.2, tabs[ACTIVE_TAB],  { y = 80, zoom = 0.25 }, 'outSine')
   tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 0 }, 'outSine')
   tween(0.2, cursor,  { alpha = 0 }, 'outSine')
-  tween(0.2, game_details,  { y = 150 }, 'outSine')
+  tween(0.2, gamedetails_container,  { y = 150 }, 'outSine')
 end
 
 function gameToGamelist()
@@ -239,7 +251,7 @@ function gameToGamelist()
   tween(0.2, tabs[ACTIVE_TAB],  { y = ACTIVE_Y, zoom = ACTIVE_TAB_ZOOM }, 'outSine')
   tween(0.2, tabs[ACTIVE_TAB],  { title_alpha = 255 }, 'outSine')
   tween(0.2, cursor,  { alpha = 255 }, 'outSine')
-  tween(0.2, game_details,  { y = SCREEN_HEIGHT }, 'outSine')
+  tween(0.2, gamedetails_container,  { y = SCREEN_HEIGHT }, 'outSine')
 
   animateGameList()
 end
@@ -311,7 +323,7 @@ end
 
 function draw_tabs()
   love.graphics.push()
-  love.graphics.translate(global.x, 0)
+  love.graphics.translate(tabs_container.x, 0)
 
   local stack_width = 285
 
@@ -332,7 +344,7 @@ function draw_tabs()
 
     --   love.graphics.stencil(myStencilFunction, "replace", 1)
     --   love.graphics.setStencilTest("greater", 0)
-    --   love.graphics.draw(tabs[i].bg, -global.x, 0, 0, 1920/1280, 1080/720)
+    --   love.graphics.draw(tabs[i].bg, -tabs_container.x, 0, 0, 1920/1280, 1080/720)
     --   love.graphics.setStencilTest()
     --   love.graphics.setShader()
     --   --love.graphics.setBlendMode('alpha')
@@ -378,13 +390,13 @@ function draw_cursor()
   love.graphics.setColor(255, 255, 255, cursor.alpha)
 
   love.graphics.push()
-  love.graphics.translate(208, cursor.y)
+  love.graphics.translate(208, SCREEN_HEIGHT/2)
   love.graphics.rotate(t)
   love.graphics.rectangle('fill', -15, -15, 30, 30)
   love.graphics.pop()
 
   love.graphics.push()
-  love.graphics.translate(208, cursor.y)
+  love.graphics.translate(208, SCREEN_HEIGHT/2)
   love.graphics.rotate(t + math.pi/4)
   love.graphics.rectangle('fill', -15, -15, 30, 30)
   love.graphics.pop()
@@ -393,14 +405,17 @@ function draw_cursor()
 
   local a = (math.cos(t*5)+1) * 128 + 128
   love.graphics.setColor(255, 255, 255, math.min(a, cursor.alpha))
-  love.graphics.rectangle('line', 160, cursor.y - 50, cursor.width, 100)
+  love.graphics.rectangle('line', 160, SCREEN_HEIGHT/2 - 50, cursor.width, 100)
   love.graphics.setColor(255, 255, 255, math.min(16, cursor.alpha))
-  love.graphics.rectangle('fill', 160, cursor.y - 50, cursor.width, 100)
+  love.graphics.rectangle('fill', 160, SCREEN_HEIGHT/2 - 50, cursor.width, 100)
 
   love.graphics.setBlendMode('alpha')
 end
 
 function draw_gamelist()
+  love.graphics.push()
+  love.graphics.translate(0, gamelist_container.y)
+
   for i=1,#games do
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255, games[i].alpha)
@@ -422,12 +437,15 @@ function draw_gamelist()
       love.graphics.print(games[i].mark, 200, games[i].y + 56)
     end
   end
+
+  draw_cursor()
+
+  love.graphics.pop()
 end
 
 function draw_gamedetails()
   love.graphics.push()
-
-  love.graphics.translate(0, game_details.y)
+  love.graphics.translate(0, gamedetails_container.y)
 
   love.graphics.setColor(0, 0, 0, 50)
   love.graphics.rectangle('fill', 0, 0, 1920, SCREEN_HEIGHT)
@@ -459,7 +477,6 @@ end
 
 function love.draw()
   draw_tabs()
-  draw_cursor()
   draw_gamelist()
   draw_gamedetails()
 end
