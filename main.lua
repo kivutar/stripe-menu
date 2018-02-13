@@ -66,35 +66,39 @@ for i=1,#tabs do
 end
 
 games = {
-  { flags={}, alpha=255, mark_alpha=128, title='After Burner Complete (Europe)' },
-  { flags={}, alpha=255, mark_alpha=128, title='After Burner Complete ~ After Burner (Japan, USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Amazing Spider-Man, The - Web of Fire (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='BC Racers (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Blackthorne (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Brutal Unleashed - Above the Claw (USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Cosmic Carnage (Europe)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Darxide (Europe) (En,Fr,De,Es)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Doom (Europe)' },
-  { flags={}, alpha=255, mark_alpha=128, title='Doom (Japan, USA)' },
+  { title='After Burner Complete (Europe)' },
+  { title='After Burner Complete ~ After Burner (Japan, USA)' },
+  { title='Amazing Spider-Man, The - Web of Fire (USA)' },
+  { title='BC Racers (USA)' },
+  { title='Blackthorne (USA)' },
+  { title='Brutal Unleashed - Above the Claw (USA)' },
+  { title='Chaotix ~ Knuckles\' Chaotix (Japan, USA)' },
+  { title='Cosmic Carnage (Europe)' },
+  { title='Cyber Brawl ~ Cosmic Carnage (Japan, USA)' },
+  { title='Darxide (Europe) (En,Fr,De,Es)' },
+  { title='Doom (Europe)' },
+  { title='Doom (Japan, USA)' },
 }
 
 -- init games y
-for i=1,#games do
-  if i == ACTIVE_GAME then
-    next_y = ACTIVE_GAME_Y
-  elseif i < ACTIVE_GAME then
-    next_y = BEFORE_GAME_Y
-  else
-    next_y = AFTER_GAME_Y
+function init_gamelist()
+  for i=1,#games do
+    if i == ACTIVE_GAME then
+      next_y = ACTIVE_GAME_Y
+    elseif i < ACTIVE_GAME then
+      next_y = BEFORE_GAME_Y
+    else
+      next_y = AFTER_GAME_Y
+    end
+    games[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
+    games[i].alpha = 0
   end
-  games[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
 end
 
 function mark_games()
   mark = ''
   for i=1,#games do
+    games[i].mark_alpha = 128
     first = string.sub(games[i].title, 1, 1)
     if first ~= mark then
       mark = first
@@ -105,6 +109,7 @@ end
 
 function flag_games()
   for i=1,#games do
+    games[i].flags = {}
     for capture in games[i].title:gmatch("%s%((.-)%)") do
       for word in capture:gmatch('([^, ]+)') do
         table.insert(games[i].flags, word)
@@ -129,6 +134,7 @@ function love.load()
   flags['Es'] = love.graphics.newImage('flags/Es.png')
   flags['En'] = love.graphics.newImage('flags/En.png')
   flags['De'] = love.graphics.newImage('flags/De.png')
+  init_gamelist()
   mark_games()
   flag_games()
 
@@ -173,6 +179,9 @@ function animateTabs()
 
   tween(0.2, tabs_container,  { x = -ACTIVE_TAB*PASSIVE_TAB_WIDTH }, 'outSine')
   tween(0.2, gamelist_container,  { y = SCREEN_HEIGHT / 2 + 100 }, 'outSine')
+  for i=1,#games do
+    tween(0.2, games[i],  { alpha = 0, mark_alpha = 0, flag_alpha = 0 }, 'outSine')
+  end
 end
 
 function animateGameList()
@@ -188,6 +197,7 @@ function animateGameList()
       next_flag_alpha = 0
     end
     tween(0.15, games[i],  { y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80 }, 'outSine')
+    tween(0.15, games[i],  { alpha = 255 }, 'outSine')
     tween(0.15, games[i],  { flag_alpha = next_flag_alpha }, 'outSine')
   end
 
@@ -222,7 +232,7 @@ function tabsToGameList()
     tween(0.2, tabs[i],  { x = next_x }, 'outSine')
     tween(0.2, tabs_container,  { x = -1300 }, 'outSine')
   end
-
+  init_gamelist()
   animateGameList()
 end
 
