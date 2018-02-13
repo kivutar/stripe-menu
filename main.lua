@@ -420,30 +420,36 @@ function draw_games()
 end
 
 function draw_game()
-  love.graphics.setColor(0, 0, 0, 50)
-  love.graphics.rectangle('fill', 0, game_details.y, 1920, SCREEN_HEIGHT)
-  love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.draw(thumbnail, 300, game_details.y + 60, 0, 550/320)
+  love.graphics.push()
 
-  love.graphics.print("Developer: Square", 915, game_details.y + 60)
-  love.graphics.print("Publisher: Sony", 915, game_details.y + 60 + 75*1)
-  love.graphics.print("Release Date: June 1984", 915, game_details.y + 60 + 75*2)
-  love.graphics.print("Rating: ★★★☆☆", 915, game_details.y + 60 + 75*3)
-  love.graphics.print("Players: 2", 915, game_details.y + 60 + 75*4)
-  love.graphics.print("Co-Op: Yes", 915, game_details.y + 60 + 75*5)
-  love.graphics.print("Genre: Action RPG", 915, game_details.y + 60 + 75*6)
+  love.graphics.translate(0, game_details.y)
+
+  love.graphics.setColor(0, 0, 0, 50)
+  love.graphics.rectangle('fill', 0, 0, 1920, SCREEN_HEIGHT)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.draw(thumbnail, 300, 60, 0, 550/320)
+
+  love.graphics.print("Developer: Square", 915, 60)
+  love.graphics.print("Publisher: Sony", 915, 60 + 75*1)
+  love.graphics.print("Release Date: June 1984", 915, 60 + 75*2)
+  love.graphics.print("Rating: ★★★☆☆", 915, 60 + 75*3)
+  love.graphics.print("Players: 2", 915, 60 + 75*4)
+  love.graphics.print("Co-Op: Yes", 915, 60 + 75*5)
+  love.graphics.print("Genre: Action RPG", 915, 60 + 75*6)
 
   love.graphics.setBlendMode('add')
 
   local a = (math.cos(t*5)+1) * 128 + 128
   love.graphics.setColor(255, 255, 255, math.min(a, 255))
-  love.graphics.rectangle('line', 300, game_details.y + 510, 550, 100)
+  love.graphics.rectangle('line', 300, 510, 550, 100)
   love.graphics.setColor(255, 255, 255, 16)
-  love.graphics.rectangle('fill', 300, game_details.y + 510, 550, 100)
+  love.graphics.rectangle('fill', 300, 510, 550, 100)
   love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.print("▶ Run", 340, game_details.y + 524)
+  love.graphics.print("▶ Run", 340, 524)
 
   love.graphics.setBlendMode('alpha')
+
+  love.graphics.pop()
 end
 
 function love.draw()
