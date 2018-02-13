@@ -332,7 +332,7 @@ function draw_tabs()
 
     --   love.graphics.stencil(myStencilFunction, "replace", 1)
     --   love.graphics.setStencilTest("greater", 0)
-    --   love.graphics.draw(tabs[i].bg, 0, 0, 0, 1920/1280, 1080/720)
+    --   love.graphics.draw(tabs[i].bg, -global.x, 0, 0, 1920/1280, 1080/720)
     --   love.graphics.setStencilTest()
     --   love.graphics.setShader()
     --   --love.graphics.setBlendMode('alpha')
