@@ -46,21 +46,6 @@ cursor = {
   alpha = 255
 }
 
-games = {
-  {title = "After Burner Complete (Europe)"},
-  {title = "After Burner Complete ~ After Burner (Japan, USA)"},
-  {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
-  {title = "BC Racers (USA)"},
-  {title = "Blackthorne (USA)"},
-  {title = "Brutal Unleashed - Above the Claw (USA)"},
-  {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
-  {title = "Cosmic Carnage (Europe)"},
-  {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
-  {title = "Darxide (Europe) (En,Fr,De,Es)"},
-  {title = "Doom (Europe)"},
-  {title = "Doom (Japan, USA)"}
-}
-
 settings = {
   {title = "Video Settings"},
   {title = "Audio Settings"},
@@ -91,7 +76,20 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Game Boy.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title = "After Burner Complete (Europe)"},
+      {title = "After Burner Complete ~ After Burner (Japan, USA)"},
+      {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
+      {title = "BC Racers (USA)"},
+      {title = "Blackthorne (USA)"},
+      {title = "Brutal Unleashed - Above the Claw (USA)"},
+      {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
+      {title = "Cosmic Carnage (Europe)"},
+      {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
+      {title = "Darxide (Europe) (En,Fr,De,Es)"},
+      {title = "Doom (Europe)"},
+      {title = "Doom (Japan, USA)"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Nintendo - Game Boy Advance.png"),
@@ -103,7 +101,20 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Game Boy Advance.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title = "After Burner Complete (Europe)"},
+      {title = "After Burner Complete ~ After Burner (Japan, USA)"},
+      {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
+      {title = "BC Racers (USA)"},
+      {title = "Blackthorne (USA)"},
+      {title = "Brutal Unleashed - Above the Claw (USA)"},
+      {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
+      {title = "Cosmic Carnage (Europe)"},
+      {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
+      {title = "Darxide (Europe) (En,Fr,De,Es)"},
+      {title = "Doom (Europe)"},
+      {title = "Doom (Japan, USA)"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Nintendo - Super Nintendo Entertainment System.png"),
@@ -115,7 +126,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Super Nintendo Entertainment System.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   },
   {
     bg = love.graphics.newImage("bg/Nintendo - Nintendo 64.png"),
@@ -127,7 +138,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Nintendo 64.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   },
   {
     bg = love.graphics.newImage("bg/Sega - Mega Drive - Genesis.png"),
@@ -139,7 +150,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sega - Mega Drive - Genesis.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   },
   {
     bg = love.graphics.newImage("bg/Sony - PlayStation.png"),
@@ -151,7 +162,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sony - PlayStation.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   },
   {
     bg = love.graphics.newImage("bg/Sony - PlayStation 2.png"),
@@ -163,7 +174,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sony - PlayStation 2.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   },
   {
     bg = love.graphics.newImage("bg/The 3DO Company - 3DO.png"),
@@ -175,7 +186,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/The 3DO Company - 3DO.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   },
   {
     bg = love.graphics.newImage("bg/Sega - Saturn.png"),
@@ -187,7 +198,7 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sega - Saturn.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {}
   }
 }
 
@@ -209,7 +220,6 @@ function init_gamelist()
       end
       list[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
       list[i].alpha = 0
-      list[i].flags = {}
     end
   end
 end
@@ -217,6 +227,7 @@ end
 function mark_games()
   for h = 1, #tabs do
     local list = tabs[h].children
+    mark = ""
     for i = 1, #list do
       list[i].mark_alpha = 128
       first = string.sub(list[i].title, 1, 1)
@@ -325,6 +336,7 @@ function animateGameList()
     tween(0.15, list[i], {y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80}, "outSine")
     tween(0.15, list[i], {alpha = 255}, "outSine")
     tween(0.15, list[i], {flag_alpha = next_flag_alpha}, "outSine")
+    tween(0.15, list[i], {mark_alpha = 128}, "outSine")
   end
 
   local new_width = font:getWidth(list[ACTIVE_GAME].title) + 170
@@ -363,11 +375,12 @@ function tabsToGameList()
 end
 
 function gamelistToGame()
-  for i = 1, #games do
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
     if i ~= ACTIVE_GAME then
-      tween(0.2, games[i], {alpha = 0}, "outSine")
+      tween(0.2, list[i], {alpha = 0}, "outSine")
     end
-    tween(0.2, games[i], {mark_alpha = 0}, "outSine")
+    tween(0.2, list[i], {mark_alpha = 0}, "outSine")
   end
 
   tween(0.2, tabs[ACTIVE_TAB], {y = 80, zoom = 0.25, title_alpha = 0}, "outSine")
@@ -377,9 +390,10 @@ function gamelistToGame()
 end
 
 function gameToGamelist()
-  for i = 1, #games do
-    tween(0.2, games[i], {alpha = 255}, "outSine")
-    tween(0.2, games[i], {mark_alpha = 128}, "outSine")
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
+    tween(0.2, list[i], {alpha = 255}, "outSine")
+    tween(0.2, list[i], {mark_alpha = 128}, "outSine")
   end
 
   tween(0.2, tabs[ACTIVE_TAB], {y = ACTIVE_Y, zoom = ACTIVE_TAB_ZOOM}, "outSine")
