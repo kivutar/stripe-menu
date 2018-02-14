@@ -3,7 +3,6 @@ require "hsl"
 
 math.randomseed(os.time())
 
-SCREEN_HEIGHT = 1080
 ANGLE = 400
 ACTIVE_TAB = 1
 ACTIVE_GAME = 1
@@ -219,7 +218,6 @@ function flag_games()
 end
 
 function love.load()
-  love.window.setMode(1920 / 2, SCREEN_HEIGHT / 2, {highdpi = true, msaa = 2})
   love.graphics.setBackgroundColor(tabs[1].color)
   font = love.graphics.newFont("font.ttf", 40)
   smallfont = love.graphics.newFont("font.ttf", 25)
