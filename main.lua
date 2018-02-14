@@ -54,21 +54,6 @@ settings = {
   {title = "Network Connection"}
 }
 
-games = {
-  {title = "After Burner Complete (Europe)"},
-  {title = "After Burner Complete ~ After Burner (Japan, USA)"},
-  {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
-  {title = "BC Racers (USA)"},
-  {title = "Blackthorne (USA)"},
-  {title = "Brutal Unleashed - Above the Claw (USA)"},
-  {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
-  {title = "Cosmic Carnage (Europe)"},
-  {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
-  {title = "Darxide (Europe) (En,Fr,De,Es)"},
-  {title = "Doom (Europe)"},
-  {title = "Doom (Japan, USA)"}
-}
-
 tabs = {
   {
     title = "Settings",
@@ -91,7 +76,29 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Game Boy.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title = "Aa Harimanada (Japan)"},
+      {title = "Addams Family, The - Pugsley's Scavenger Hunt (USA, Europe)"},
+      {title = "Addams Family, The (Europe) (En,Fr,De)"},
+      {title = "Addams Family, The (Japan)"},
+      {title = "Addams Family, The (USA)"},
+      {title = "Adventure Island (USA, Europe)"},
+      {title = "Adventure Island II - Aliens in Paradise (USA, Europe)"},
+      {title = "Adventures of Pinocchio, The (Unknown) (Proto)"},
+      {title = "Adventures of Rocky and Bullwinkle and Friends, The (USA)"},
+      {title = "Adventures of Star Saver, The (USA, Europe)"},
+      {title = "Aero Star (Japan)"},
+      {title = "Aerostar (USA, Europe)"},
+      {title = "After Burst (Japan)"},
+      {title = "Agro Soar (Australia)"},
+      {title = "Akumajou Special - Boku Dracula-kun (Japan)"},
+      {title = "Alfred Chicken (Europe)"},
+      {title = "Alfred Chicken (USA)"},
+      {title = "Alien 3 (Japan)"},
+      {title = "Alien 3 (USA, Europe)"},
+      {title = "Alien Olympics (Europe)"},
+      {title = "Alien vs Predator - The Last of His Clan (USA)"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Nintendo - Game Boy Advance.png"),
@@ -103,7 +110,20 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Game Boy Advance.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title = "After Burner Complete (Europe)"},
+      {title = "After Burner Complete ~ After Burner (Japan, USA)"},
+      {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
+      {title = "BC Racers (USA)"},
+      {title = "Blackthorne (USA)"},
+      {title = "Brutal Unleashed - Above the Claw (USA)"},
+      {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
+      {title = "Cosmic Carnage (Europe)"},
+      {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
+      {title = "Darxide (Europe) (En,Fr,De,Es)"},
+      {title = "Doom (Europe)"},
+      {title = "Doom (Japan, USA)"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Nintendo - Super Nintendo Entertainment System.png"),
@@ -115,7 +135,14 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Super Nintendo Entertainment System.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title = "Breath of Fire - Ryuu no Senshi (Japan)"},
+      {title = "Dragon Ball Z - Hyper Dimension (Japan)"},
+      {title = "Legend of Zelda, The - A Link to the Past (Europe)"},
+      {title = "Lethal Weapon (Europe)"},
+      {title = "Secret of Mana (France)"},
+      {title = "Shin Megami Tensei II (Japan)"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Nintendo - Nintendo 64.png"),
@@ -127,7 +154,9 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Nintendo - Nintendo 64.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title="No game"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Sega - Mega Drive - Genesis.png"),
@@ -139,7 +168,20 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sega - Mega Drive - Genesis.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title = "After Burner Complete (Europe)"},
+      {title = "After Burner Complete ~ After Burner (Japan, USA)"},
+      {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
+      {title = "BC Racers (USA)"},
+      {title = "Blackthorne (USA)"},
+      {title = "Brutal Unleashed - Above the Claw (USA)"},
+      {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
+      {title = "Cosmic Carnage (Europe)"},
+      {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
+      {title = "Darxide (Europe) (En,Fr,De,Es)"},
+      {title = "Doom (Europe)"},
+      {title = "Doom (Japan, USA)"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Sony - PlayStation.png"),
@@ -151,7 +193,9 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sony - PlayStation.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title="No game"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Sony - PlayStation 2.png"),
@@ -163,7 +207,9 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sony - PlayStation 2.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title="No game"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/The 3DO Company - 3DO.png"),
@@ -175,7 +221,9 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/The 3DO Company - 3DO.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title="No game"}
+    }
   },
   {
     bg = love.graphics.newImage("bg/Sega - Saturn.png"),
@@ -187,7 +235,9 @@ tabs = {
     y = AFTER_Y,
     icon = love.graphics.newImage("png/Sega - Saturn.png"),
     zoom = PASSIVE_TAB_ZOOM,
-    children = games
+    children = {
+      {title="No game"}
+    }
   }
 }
 
@@ -257,6 +307,7 @@ function love.load()
   flags["Es"] = love.graphics.newImage("flags/Es.png")
   flags["En"] = love.graphics.newImage("flags/En.png")
   flags["De"] = love.graphics.newImage("flags/De.png")
+  flags["France"] = love.graphics.newImage("flags/France.png")
   init_gamelist()
   mark_games()
   flag_games()
