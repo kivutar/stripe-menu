@@ -46,122 +46,6 @@ cursor = {
   alpha = 255
 }
 
-tabs = {
-  {
-    title = "Settings",
-    subtitle = "Configure Lakka",
-    title_alpha = 255,
-    width = ACTIVE_TAB_WIDTH,
-    x = ACTIVE_X,
-    y = ACTIVE_Y,
-    icon = love.graphics.newImage("png/setting.png"),
-    zoom = ACTIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Nintendo - Game Boy.png"),
-    title = "Game Boy",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Game Boy.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Nintendo - Game Boy Advance.png"),
-    title = "Game Boy Advance",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Game Boy Advance.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Nintendo - Super Nintendo Entertainment System.png"),
-    title = "Super Nintendo",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Super Nintendo Entertainment System.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Nintendo - Nintendo 64.png"),
-    title = "Nintendo 64",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Nintendo 64.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Sega - Mega Drive - Genesis.png"),
-    title = "Genesis",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sega - Mega Drive - Genesis.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Sony - PlayStation.png"),
-    title = "PlayStation",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sony - PlayStation.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Sony - PlayStation 2.png"),
-    title = "PlayStation 2",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sony - PlayStation 2.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/The 3DO Company - 3DO.png"),
-    title = "3DO",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/The 3DO Company - 3DO.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  },
-  {
-    bg = love.graphics.newImage("bg/Sega - Saturn.png"),
-    title = "Saturn",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sega - Saturn.png"),
-    zoom = PASSIVE_TAB_ZOOM
-  }
-}
-
-for i = 1, #tabs do
-  tabs[i].color = {HSL((i - 1) * 20 % 256, 128, 128, 140)}
-end
-
 games = {
   {title = "After Burner Complete (Europe)"},
   {title = "After Burner Complete ~ After Burner (Japan, USA)"},
@@ -177,43 +61,186 @@ games = {
   {title = "Doom (Japan, USA)"}
 }
 
+settings = {
+  {title = "Video Settings"},
+  {title = "Audio Settings"},
+  {title = "Menu Settings"},
+  {title = "Retro Achievements"},
+  {title = "Network Connection"}
+}
+
+tabs = {
+  {
+    title = "Settings",
+    subtitle = "Configure Lakka",
+    title_alpha = 255,
+    width = ACTIVE_TAB_WIDTH,
+    x = ACTIVE_X,
+    y = ACTIVE_Y,
+    icon = love.graphics.newImage("png/setting.png"),
+    zoom = ACTIVE_TAB_ZOOM,
+    children = settings
+  },
+  {
+    bg = love.graphics.newImage("bg/Nintendo - Game Boy.png"),
+    title = "Game Boy",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Nintendo - Game Boy.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Nintendo - Game Boy Advance.png"),
+    title = "Game Boy Advance",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Nintendo - Game Boy Advance.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Nintendo - Super Nintendo Entertainment System.png"),
+    title = "Super Nintendo",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Nintendo - Super Nintendo Entertainment System.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Nintendo - Nintendo 64.png"),
+    title = "Nintendo 64",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Nintendo - Nintendo 64.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Sega - Mega Drive - Genesis.png"),
+    title = "Genesis",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Sega - Mega Drive - Genesis.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Sony - PlayStation.png"),
+    title = "PlayStation",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Sony - PlayStation.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Sony - PlayStation 2.png"),
+    title = "PlayStation 2",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Sony - PlayStation 2.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/The 3DO Company - 3DO.png"),
+    title = "3DO",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/The 3DO Company - 3DO.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  },
+  {
+    bg = love.graphics.newImage("bg/Sega - Saturn.png"),
+    title = "Saturn",
+    subtitle = "13 Games - 3 Favorites",
+    title_alpha = 0,
+    width = PASSIVE_TAB_WIDTH,
+    x = AFTER_X,
+    y = AFTER_Y,
+    icon = love.graphics.newImage("png/Sega - Saturn.png"),
+    zoom = PASSIVE_TAB_ZOOM,
+    children = games
+  }
+}
+
+for i = 1, #tabs do
+  tabs[i].color = {HSL((i - 1) * 20 % 256, 128, 128, 140)}
+end
+
 -- init games y
 function init_gamelist()
-  for i = 1, #games do
-    if i == ACTIVE_GAME then
-      next_y = ACTIVE_GAME_Y
-    elseif i < ACTIVE_GAME then
-      next_y = BEFORE_GAME_Y
-    else
-      next_y = AFTER_GAME_Y
+  for h = 1, #tabs do
+    local list = tabs[h].children
+    for i = 1, #list do
+      if i == ACTIVE_GAME then
+        next_y = ACTIVE_GAME_Y
+      elseif i < ACTIVE_GAME then
+        next_y = BEFORE_GAME_Y
+      else
+        next_y = AFTER_GAME_Y
+      end
+      list[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
+      list[i].alpha = 0
+      list[i].flags = {}
     end
-    games[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
-    games[i].alpha = 0
   end
 end
 
 function mark_games()
-  mark = ""
-  for i = 1, #games do
-    games[i].mark_alpha = 128
-    first = string.sub(games[i].title, 1, 1)
-    if first ~= mark then
-      mark = first
-      games[i].mark = mark
+  for h = 1, #tabs do
+    local list = tabs[h].children
+    for i = 1, #list do
+      list[i].mark_alpha = 128
+      first = string.sub(list[i].title, 1, 1)
+      if first ~= mark then
+        mark = first
+        list[i].mark = mark
+      end
     end
   end
 end
 
 function flag_games()
-  for i = 1, #games do
-    games[i].flags = {}
-    for capture in games[i].title:gmatch("%s%((.-)%)") do
-      for word in capture:gmatch("([^, ]+)") do
-        table.insert(games[i].flags, word)
+  for h = 1, #tabs do
+    local list = tabs[h].children
+    for i = 1, #list do
+      list[i].flags = {}
+      for capture in list[i].title:gmatch("%s%((.-)%)") do
+        for word in capture:gmatch("([^, ]+)") do
+          table.insert(list[i].flags, word)
+        end
       end
+      list[i].title = list[i].title:gsub("%s%((.-)%)", "")
+      list[i].flag_alpha = 0
     end
-    games[i].title = games[i].title:gsub("%s%((.-)%)", "")
-    games[i].flag_alpha = 0
   end
 end
 
@@ -276,13 +303,15 @@ function animateTabs()
 
   tween(0.2, tabs_container, {x = -ACTIVE_TAB * PASSIVE_TAB_WIDTH}, "outSine")
   tween(0.2, gamelist_container, {y = SCREEN_HEIGHT / 2 + 100}, "outSine")
-  for i = 1, #games do
-    tween(0.2, games[i], {alpha = 0, mark_alpha = 0, flag_alpha = 0}, "outSine")
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
+    tween(0.2, list[i], {alpha = 0, mark_alpha = 0, flag_alpha = 0}, "outSine")
   end
 end
 
 function animateGameList()
-  for i = 1, #games do
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
     if i == ACTIVE_GAME then
       next_y = ACTIVE_GAME_Y
       next_flag_alpha = 255
@@ -293,13 +322,13 @@ function animateGameList()
       next_y = AFTER_GAME_Y
       next_flag_alpha = 0
     end
-    tween(0.15, games[i], {y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80}, "outSine")
-    tween(0.15, games[i], {alpha = 255}, "outSine")
-    tween(0.15, games[i], {flag_alpha = next_flag_alpha}, "outSine")
+    tween(0.15, list[i], {y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80}, "outSine")
+    tween(0.15, list[i], {alpha = 255}, "outSine")
+    tween(0.15, list[i], {flag_alpha = next_flag_alpha}, "outSine")
   end
 
-  local new_width = font:getWidth(games[ACTIVE_GAME].title) + 170
-  new_width = new_width + 71 * #games[ACTIVE_GAME].flags
+  local new_width = font:getWidth(list[ACTIVE_GAME].title) + 170
+  new_width = new_width + 71 * #list[ACTIVE_GAME].flags
   tween(0.15, cursor, {width = new_width}, "outSine")
   tween(0.15, gamelist_container, {y = 0}, "outSine")
 end
@@ -389,7 +418,7 @@ function love.update(dt)
   if SCREEN == SCREEN_GAMELIST and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME + 1
-    if ACTIVE_GAME > #games then
+    if ACTIVE_GAME > #tabs[ACTIVE_TAB].children then
       ACTIVE_GAME = 1
     end
 
@@ -400,7 +429,7 @@ function love.update(dt)
     t1 = love.timer.getTime()
     ACTIVE_GAME = ACTIVE_GAME - 1
     if ACTIVE_GAME < 1 then
-      ACTIVE_GAME = #games
+      ACTIVE_GAME = #tabs[ACTIVE_TAB].children
     end
 
     animateGameList()
@@ -523,25 +552,26 @@ function draw_gamelist()
   love.graphics.push()
   love.graphics.translate(0, gamelist_container.y)
 
-  for i = 1, #games do
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
     love.graphics.setFont(font)
-    love.graphics.setColor(255, 255, 255, games[i].alpha)
-    love.graphics.print(games[i].title, 300, games[i].y + 45)
+    love.graphics.setColor(255, 255, 255, list[i].alpha)
+    love.graphics.print(list[i].title, 300, list[i].y + 45)
 
-    love.graphics.setColor(255, 255, 255, games[i].flag_alpha)
+    love.graphics.setColor(255, 255, 255, list[i].flag_alpha)
     local stack_width = 20
-    local title_width = font:getWidth(games[i].title)
-    for f = 1, #games[i].flags do
-      if flags[games[i].flags[f]] then
-        love.graphics.draw(flags[games[i].flags[f]], 300 + title_width + stack_width, games[i].y + 58)
+    local title_width = font:getWidth(list[i].title)
+    for f = 1, #list[i].flags do
+      if flags[list[i].flags[f]] then
+        love.graphics.draw(flags[list[i].flags[f]], 300 + title_width + stack_width, list[i].y + 58)
         stack_width = stack_width + 71
       end
     end
 
-    if games[i].mark then
+    if list[i].mark then
       love.graphics.setFont(smallfont)
-      love.graphics.setColor(255, 255, 255, games[i].mark_alpha)
-      love.graphics.print(games[i].mark, 200, games[i].y + 56)
+      love.graphics.setColor(255, 255, 255, list[i].mark_alpha)
+      love.graphics.print(list[i].mark, 200, list[i].y + 56)
     end
   end
 
