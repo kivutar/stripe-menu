@@ -54,6 +54,8 @@ settings = {
   {title = "Network Connection"}
 }
 
+THEME = "monochrome"
+
 tabs = {
   {
     title = "Settings",
@@ -62,7 +64,7 @@ tabs = {
     width = ACTIVE_TAB_WIDTH,
     x = ACTIVE_X,
     y = ACTIVE_Y,
-    icon = love.graphics.newImage("png/setting.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/setting.png"),
     zoom = ACTIVE_TAB_ZOOM,
     children = settings
   },
@@ -74,7 +76,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Game Boy.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Game Boy.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title = "Aa Harimanada (Japan)"},
@@ -108,7 +110,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Game Boy Advance.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Game Boy Advance.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title = "After Burner Complete (Europe)"},
@@ -133,7 +135,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Super Nintendo Entertainment System.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Super Nintendo Entertainment System.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title = "Breath of Fire - Ryuu no Senshi (Japan)"},
@@ -152,7 +154,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Nintendo - Nintendo 64.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Nintendo 64.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title="No game"}
@@ -166,7 +168,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sega - Mega Drive - Genesis.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Sega - Mega Drive - Genesis.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title = "After Burner Complete (Europe)"},
@@ -191,7 +193,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sony - PlayStation.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Sony - PlayStation.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title="No game"}
@@ -205,7 +207,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sony - PlayStation 2.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Sony - PlayStation 2.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title="No game"}
@@ -219,7 +221,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/The 3DO Company - 3DO.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/The 3DO Company - 3DO.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title="No game"}
@@ -233,7 +235,7 @@ tabs = {
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("png/Sega - Saturn.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Sega - Saturn.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title="No game"}
@@ -556,10 +558,10 @@ function draw_tabs()
       stack_width + tabs[i].width / 2 + tabs[i].x,
       tabs[i].y,
       0,
-      tabs[i].zoom,
-      tabs[i].zoom,
-      128,
-      128
+      tabs[i].zoom*256.0/tabs[i].icon:getWidth(),
+      tabs[i].zoom*256.0/tabs[i].icon:getHeight(),
+      tabs[i].icon:getWidth()/2,
+      tabs[i].icon:getHeight()/2
     )
 
     love.graphics.setColor(255, 255, 255, tabs[i].title_alpha)
