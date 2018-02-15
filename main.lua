@@ -58,6 +58,7 @@ THEME = "monochrome"
 
 tabs = {
   {
+    fullname = "Settings",
     title = "Settings",
     subtitle = "Configure Lakka",
     title_alpha = 255,
@@ -69,6 +70,7 @@ tabs = {
     children = settings
   },
   {
+    fullname = "Nintendo - Game Boy",
     bg = love.graphics.newImage("bg/Nintendo - Game Boy.png"),
     title = "Game Boy",
     subtitle = "13 Games - 3 Favorites",
@@ -103,6 +105,7 @@ tabs = {
     }
   },
   {
+    fullname = "Nintendo - Game Boy Advance",
     bg = love.graphics.newImage("bg/Nintendo - Game Boy Advance.png"),
     title = "Game Boy Advance",
     subtitle = "13 Games - 3 Favorites",
@@ -128,6 +131,7 @@ tabs = {
     }
   },
   {
+    fullname = "Nintendo - Super Nintendo Entertainment System",
     bg = love.graphics.newImage("bg/Nintendo - Super Nintendo Entertainment System.png"),
     title = "Super Nintendo",
     subtitle = "13 Games - 3 Favorites",
@@ -147,6 +151,7 @@ tabs = {
     }
   },
   {
+    fullname = "Nintendo - Nintendo 64",
     bg = love.graphics.newImage("bg/Nintendo - Nintendo 64.png"),
     title = "Nintendo 64",
     subtitle = "13 Games - 3 Favorites",
@@ -161,14 +166,15 @@ tabs = {
     }
   },
   {
-    bg = love.graphics.newImage("bg/Sega - Mega Drive - Genesis.png"),
-    title = "Genesis",
+    fullname = "Sega - 32X",
+    bg = love.graphics.newImage("bg/Sega - 32X.png"),
+    title = "32X",
     subtitle = "13 Games - 3 Favorites",
     title_alpha = 0,
     width = PASSIVE_TAB_WIDTH,
     x = AFTER_X,
     y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Sega - Mega Drive - Genesis.png"),
+    icon = love.graphics.newImage("icons/"..THEME.."/Sega - 32X.png"),
     zoom = PASSIVE_TAB_ZOOM,
     children = {
       {title = "After Burner Complete (Europe)"},
@@ -186,6 +192,7 @@ tabs = {
     }
   },
   {
+    fullname = "Sony - PlayStation",
     bg = love.graphics.newImage("bg/Sony - PlayStation.png"),
     title = "PlayStation",
     subtitle = "13 Games - 3 Favorites",
@@ -200,6 +207,7 @@ tabs = {
     }
   },
   {
+    fullname = "Sony - PlayStation 2",
     bg = love.graphics.newImage("bg/Sony - PlayStation 2.png"),
     title = "PlayStation 2",
     subtitle = "13 Games - 3 Favorites",
@@ -214,6 +222,7 @@ tabs = {
     }
   },
   {
+    fullname = "The 3DO Company - 3DO",
     bg = love.graphics.newImage("bg/The 3DO Company - 3DO.png"),
     title = "3DO",
     subtitle = "13 Games - 3 Favorites",
@@ -228,6 +237,7 @@ tabs = {
     }
   },
   {
+    fullname = "Sega - Saturn",
     bg = love.graphics.newImage("bg/Sega - Saturn.png"),
     title = "Saturn",
     subtitle = "13 Games - 3 Favorites",
@@ -245,6 +255,7 @@ tabs = {
 
 for i = 1, #tabs do
   tabs[i].color = {HSL((i - 1) * 20 % 256, 128, 128, 140)}
+  --tabs[i].color = {HSL(160, 30, ((i - 1) % 2) * 15 + 30, 140)}
 end
 
 -- init games y
@@ -261,6 +272,9 @@ function init_gamelist()
       end
       list[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
       list[i].alpha = 0
+      if love.filesystem.exists("thumbnails/"..tabs[h].fullname.."/Named_Boxarts/"..list[i].title..".png") then
+        list[i].thumbnail = love.graphics.newImage("thumbnails/"..tabs[h].fullname.."/Named_Boxarts/"..list[i].title..".png")
+      end
     end
   end
 end
@@ -300,7 +314,6 @@ function love.load()
   love.graphics.setBackgroundColor(tabs[1].color)
   font = love.graphics.newFont("font.ttf", 40)
   smallfont = love.graphics.newFont("font.ttf", 25)
-  thumbnail = love.graphics.newImage("thumbnails/After Burner Complete (Europe).png")
   flags = {}
   flags["Japan"] = love.graphics.newImage("flags/Japan.png")
   flags["Europe"] = love.graphics.newImage("flags/Europe.png")
@@ -640,10 +653,16 @@ function draw_gamedetails()
   love.graphics.push()
   love.graphics.translate(0, gamedetails_container.y)
 
+  love.graphics.setFont(font)
   love.graphics.setColor(0, 0, 0, 50)
   love.graphics.rectangle("fill", 0, 0, 1920, SCREEN_HEIGHT)
   love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.draw(thumbnail, 300, 60, 0, 550 / 320)
+  if tabs[ACTIVE_TAB].children[ACTIVE_GAME] then
+    local th = tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail
+    if th then
+      love.graphics.draw(th, 300, 60, 0, 550 / th:getWidth())
+    end
+  end
 
   love.graphics.print("Developer: Square", 915, 60)
   love.graphics.print("Publisher: Sony", 915, 60 + 75 * 1)
@@ -657,11 +676,11 @@ function draw_gamedetails()
 
   local a = (math.cos(t * 5) + 1) * 128 + 128
   love.graphics.setColor(255, 255, 255, math.min(a, 255))
-  love.graphics.rectangle("line", 300, 510, 550, 100)
+  love.graphics.rectangle("line", 915, 90 + 75 * 7, 550, 100)
   love.graphics.setColor(255, 255, 255, 16)
-  love.graphics.rectangle("fill", 300, 510, 550, 100)
+  love.graphics.rectangle("fill", 915, 90 + 75 * 7, 550, 100)
   love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.print("▶ Run", 340, 524)
+  love.graphics.print("▶ Run", 915 + 20, 105 + 75 * 7)
 
   love.graphics.setBlendMode("alpha")
 
