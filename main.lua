@@ -8,7 +8,7 @@ ACTIVE_TAB = 1
 ACTIVE_GAME = 1
 t = 0
 t1 = 0
-local SCREEN_TABS, SCREEN_GAMELIST, SCREEN_GAMEDETAILS = 0, 1, 2
+local SCREEN_TABS, SCREEN_GAMELIST, SCREEN_GAMEDETAILS, SCREEN_SETTINGS = 0, 1, 2, 3
 SCREEN = SCREEN_TABS
 
 PASSIVE_TAB_WIDTH = 128
@@ -41,14 +41,34 @@ gamedetails_container = {
   y = SCREEN_HEIGHT
 }
 
+settings_container = {
+  y = SCREEN_HEIGHT
+}
+
 cursor = {
   width = 0,
   alpha = 255
 }
 
 settings = {
-  {title = "Video Settings"},
-  {title = "Audio Settings"},
+  {
+    title = "Video Settings",
+    children = {
+      { title = "Display Framerate", type = "bool" },
+      { title = "Fullscreen", type = "bool" },
+      { title = "Threaded Video", type = "bool" },
+      { title = "Aspect Ratio", type = "list" }
+    }
+  },
+  {
+    title = "Audio Settings",
+    children = {
+      { title = "Mute", type = "bool" },
+      { title = "Audio Volume", type = "int", min=0, max=100, step=10 },
+      { title = "Audio Device", type = "list" }
+    }
+  },
+  {title = "Input Settings"},
   {title = "Menu Settings"},
   {title = "Retro Achievements"},
   {title = "Network Connection"}
@@ -444,6 +464,21 @@ function gamelistToGame()
   tween(0.2, gamedetails_container, {y = 150}, "outSine")
 end
 
+function gamelistToSettings()
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
+    if i ~= ACTIVE_GAME then
+      tween(0.2, list[i], {alpha = 0}, "outSine")
+    end
+    tween(0.2, list[i], {mark_alpha = 0}, "outSine")
+  end
+
+  tween(0.2, tabs[ACTIVE_TAB], {y = 80, zoom = 0.25, title_alpha = 0}, "outSine")
+  tween(0.2, cursor, {alpha = 0}, "outSine")
+  tween(0.2, gamelist_container, {y = -SCREEN_HEIGHT / 2 + 75}, "outSine")
+  tween(0.2, settings_container, {y = 150}, "outSine")
+end
+
 function gameToGamelist()
   local list = tabs[ACTIVE_TAB].children
   for i = 1, #list do
@@ -455,6 +490,21 @@ function gameToGamelist()
   tween(0.2, tabs[ACTIVE_TAB], {title_alpha = 255}, "outSine")
   tween(0.2, cursor, {alpha = 255}, "outSine")
   tween(0.2, gamedetails_container, {y = SCREEN_HEIGHT}, "outSine")
+
+  animateGameList()
+end
+
+function settingsToGamelist()
+  local list = tabs[ACTIVE_TAB].children
+  for i = 1, #list do
+    tween(0.2, list[i], {alpha = 255}, "outSine")
+    tween(0.2, list[i], {mark_alpha = 128}, "outSine")
+  end
+
+  tween(0.2, tabs[ACTIVE_TAB], {y = ACTIVE_Y, zoom = ACTIVE_TAB_ZOOM}, "outSine")
+  tween(0.2, tabs[ACTIVE_TAB], {title_alpha = 255}, "outSine")
+  tween(0.2, cursor, {alpha = 255}, "outSine")
+  tween(0.2, settings_container, {y = SCREEN_HEIGHT}, "outSine")
 
   animateGameList()
 end
@@ -512,13 +562,21 @@ function love.keypressed(key)
     tabsToGameList()
     SCREEN = SCREEN_GAMELIST
   elseif key == "return" and SCREEN == SCREEN_GAMELIST then
-    gamelistToGame()
-    SCREEN = SCREEN_GAMEDETAILS
+    if tabs[ACTIVE_TAB].title == "Settings" then
+      gamelistToSettings()
+      SCREEN = SCREEN_SETTINGS
+    else
+      gamelistToGame()
+      SCREEN = SCREEN_GAMEDETAILS
+    end
   elseif key == "backspace" and SCREEN == SCREEN_GAMELIST then
     animateTabs()
     SCREEN = SCREEN_TABS
   elseif key == "backspace" and SCREEN == SCREEN_GAMEDETAILS then
     gameToGamelist()
+    SCREEN = SCREEN_GAMELIST
+  elseif key == "backspace" and SCREEN == SCREEN_SETTINGS then
+    settingsToGamelist()
     SCREEN = SCREEN_GAMELIST
   end
 end
@@ -687,8 +745,24 @@ function draw_gamedetails()
   love.graphics.pop()
 end
 
+
+function draw_settings()
+  love.graphics.push()
+  love.graphics.translate(0, settings_container.y)
+
+  love.graphics.setFont(font)
+  love.graphics.setColor(0, 0, 0, 50)
+  love.graphics.rectangle("fill", 0, 0, 1920, SCREEN_HEIGHT)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.print("Option 1", 300, 60)
+
+  love.graphics.pop()
+end
+
+
 function love.draw()
   draw_tabs()
   draw_gamelist()
   draw_gamedetails()
+  draw_settings()
 end
