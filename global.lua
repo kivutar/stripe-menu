@@ -1,3 +1,5 @@
+THEME = "monochrome"
+
 ANGLE = 400
 ACTIVE_TAB = 1
 ACTIVE_GAME = 1
