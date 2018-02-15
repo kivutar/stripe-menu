@@ -22,194 +22,37 @@ tabs = {
     icon = love.graphics.newImage("icons/"..THEME.."/setting.png"),
     zoom = ACTIVE_TAB_ZOOM,
     children = settings
-  },
-  {
-    fullname = "Nintendo - Game Boy",
-    bg = love.graphics.newImage("bg/Nintendo - Game Boy.png"),
-    title = "Game Boy",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Game Boy.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title = "Aa Harimanada (Japan)"},
-      {title = "Addams Family, The - Pugsley's Scavenger Hunt (USA, Europe)"},
-      {title = "Addams Family, The (Europe) (En,Fr,De)"},
-      {title = "Addams Family, The (Japan)"},
-      {title = "Addams Family, The (USA)"},
-      {title = "Adventure Island (USA, Europe)"},
-      {title = "Adventure Island II - Aliens in Paradise (USA, Europe)"},
-      {title = "Adventures of Pinocchio, The (Unknown) (Proto)"},
-      {title = "Adventures of Rocky and Bullwinkle and Friends, The (USA)"},
-      {title = "Adventures of Star Saver, The (USA, Europe)"},
-      {title = "Aero Star (Japan)"},
-      {title = "Aerostar (USA, Europe)"},
-      {title = "After Burst (Japan)"},
-      {title = "Agro Soar (Australia)"},
-      {title = "Akumajou Special - Boku Dracula-kun (Japan)"},
-      {title = "Alfred Chicken (Europe)"},
-      {title = "Alfred Chicken (USA)"},
-      {title = "Alien 3 (Japan)"},
-      {title = "Alien 3 (USA, Europe)"},
-      {title = "Alien Olympics (Europe)"},
-      {title = "Alien vs Predator - The Last of His Clan (USA)"}
-    }
-  },
-  {
-    fullname = "Nintendo - Game Boy Advance",
-    bg = love.graphics.newImage("bg/Nintendo - Game Boy Advance.png"),
-    title = "Game Boy Advance",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Game Boy Advance.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title = "After Burner Complete (Europe)"},
-      {title = "After Burner Complete ~ After Burner (Japan, USA)"},
-      {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
-      {title = "BC Racers (USA)"},
-      {title = "Blackthorne (USA)"},
-      {title = "Brutal Unleashed - Above the Claw (USA)"},
-      {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
-      {title = "Cosmic Carnage (Europe)"},
-      {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
-      {title = "Darxide (Europe) (En,Fr,De,Es)"},
-      {title = "Doom (Europe)"},
-      {title = "Doom (Japan, USA)"}
-    }
-  },
-  {
-    fullname = "Nintendo - Super Nintendo Entertainment System",
-    bg = love.graphics.newImage("bg/Nintendo - Super Nintendo Entertainment System.png"),
-    title = "Super Nintendo",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Super Nintendo Entertainment System.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title = "Breath of Fire - Ryuu no Senshi (Japan)"},
-      {title = "Dragon Ball Z - Hyper Dimension (Japan)"},
-      {title = "Legend of Zelda, The - A Link to the Past (Europe)"},
-      {title = "Lethal Weapon (Europe)"},
-      {title = "Secret of Mana (France)"},
-      {title = "Shin Megami Tensei II (Japan)"}
-    }
-  },
-  {
-    fullname = "Nintendo - Nintendo 64",
-    bg = love.graphics.newImage("bg/Nintendo - Nintendo 64.png"),
-    title = "Nintendo 64",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Nintendo - Nintendo 64.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title="No game"}
-    }
-  },
-  {
-    fullname = "Sega - 32X",
-    bg = love.graphics.newImage("bg/Sega - 32X.png"),
-    title = "32X",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Sega - 32X.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title = "After Burner Complete (Europe)"},
-      {title = "After Burner Complete ~ After Burner (Japan, USA)"},
-      {title = "Amazing Spider-Man, The - Web of Fire (USA)"},
-      {title = "BC Racers (USA)"},
-      {title = "Blackthorne (USA)"},
-      {title = "Brutal Unleashed - Above the Claw (USA)"},
-      {title = "Chaotix ~ Knuckles' Chaotix (Japan, USA)"},
-      {title = "Cosmic Carnage (Europe)"},
-      {title = "Cyber Brawl ~ Cosmic Carnage (Japan, USA)"},
-      {title = "Darxide (Europe) (En,Fr,De,Es)"},
-      {title = "Doom (Europe)"},
-      {title = "Doom (Japan, USA)"}
-    }
-  },
-  {
-    fullname = "Sony - PlayStation",
-    bg = love.graphics.newImage("bg/Sony - PlayStation.png"),
-    title = "PlayStation",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Sony - PlayStation.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title="No game"}
-    }
-  },
-  {
-    fullname = "Sony - PlayStation 2",
-    bg = love.graphics.newImage("bg/Sony - PlayStation 2.png"),
-    title = "PlayStation 2",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Sony - PlayStation 2.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title="No game"}
-    }
-  },
-  {
-    fullname = "The 3DO Company - 3DO",
-    bg = love.graphics.newImage("bg/The 3DO Company - 3DO.png"),
-    title = "3DO",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/The 3DO Company - 3DO.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title="No game"}
-    }
-  },
-  {
-    fullname = "Sega - Saturn",
-    bg = love.graphics.newImage("bg/Sega - Saturn.png"),
-    title = "Saturn",
-    subtitle = "13 Games - 3 Favorites",
-    title_alpha = 0,
-    width = PASSIVE_TAB_WIDTH,
-    x = AFTER_X,
-    y = AFTER_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/Sega - Saturn.png"),
-    zoom = PASSIVE_TAB_ZOOM,
-    children = {
-      {title="No game"}
-    }
   }
 }
 
-for i = 1, #tabs do
-  tabs[i].color = {HSL((i - 1) * 20 % 256, 128, 128, 140)}
-  --tabs[i].color = {HSL(160, 30, ((i - 1) % 2) * 15 + 30, 140)}
+function load_playlists()
+  local playlists = love.filesystem.getDirectoryItems("playlists")
+  for k, playlist in ipairs(playlists) do
+    lines, size = love.filesystem.read("playlists/" .. playlist)
+    local tab = {
+      fullname = playlist,
+      title = playlist,
+      subtitle = "13 Games - 3 Favorites",
+      title_alpha = 0,
+      width = PASSIVE_TAB_WIDTH,
+      x = AFTER_X,
+      y = AFTER_Y,
+      icon = love.graphics.newImage("icons/"..THEME.."/"..playlist..".png"),
+      zoom = PASSIVE_TAB_ZOOM,
+      children = {}
+    }
+    for line in lines:gmatch("[^\r\n]+") do
+      table.insert(tab.children, {title=line})
+    end
+    table.insert(tabs, tab)
+  end
+end
+
+function color_tabs()
+  for i = 1, #tabs do
+    tabs[i].color = {HSL((i - 1) * 20 % 256, 128, 128, 140)}
+    --tabs[i].color = {HSL(160, 30, ((i - 1) % 2) * 15 + 30, 140)}
+  end
 end
 
 -- init games y
@@ -265,7 +108,6 @@ function flag_games()
 end
 
 function love.load()
-  love.graphics.setBackgroundColor(tabs[1].color)
   font = love.graphics.newFont("font.ttf", 40)
   smallfont = love.graphics.newFont("font.ttf", 25)
   flags = {}
@@ -277,6 +119,9 @@ function love.load()
   flags["En"] = love.graphics.newImage("flags/En.png")
   flags["De"] = love.graphics.newImage("flags/De.png")
   flags["France"] = love.graphics.newImage("flags/France.png")
+  load_playlists()
+  color_tabs()
+  love.graphics.setBackgroundColor(tabs[1].color)
   init_gamelist()
   mark_games()
   flag_games()
