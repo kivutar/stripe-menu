@@ -2,7 +2,7 @@ function draw_gamedetails_loading()
   local b = (math.cos(t * 5) + 1) * 32 + 32
   love.graphics.setColor(0, 0, 0, b)
   love.graphics.rectangle("fill", 300, 60, 550, 550)
-  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setColor(255, 255, 255, 128)
   love.graphics.circle("fill", 300+550/2 + math.cos(t * 5) * 40, 60+550/2 + math.sin(t * 5) * 40, 10)
   love.graphics.circle("fill", 300+550/2 + math.cos(t * 5 + math.pi*0.5) * 40, 60+550/2 + math.sin(t * 5 + math.pi*0.5) * 40, 10)
   love.graphics.circle("fill", 300+550/2 + math.cos(t * 5 + math.pi*1.0) * 40, 60+550/2 + math.sin(t * 5 + math.pi*1.0) * 40, 10)

@@ -29,7 +29,9 @@ function draw_gamelist()
   love.graphics.translate(0, gamelist_container.y)
 
   local list = tabs[ACTIVE_TAB].children
-  for i = 1, #list do
+  local first = math.max(1, ACTIVE_GAME - 5)
+  local last = math.min(#list, ACTIVE_GAME + 5)
+  for i = first, last do
     love.graphics.setFont(font)
     love.graphics.setColor(255, 255, 255, list[i].alpha)
     love.graphics.print(list[i].title, 300, list[i].y + 45)

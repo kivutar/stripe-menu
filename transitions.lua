@@ -36,7 +36,9 @@ end
 
 function animateGameList()
   local list = tabs[ACTIVE_TAB].children
-  for i = 1, #list do
+  local first = math.max(1, ACTIVE_GAME - 5)
+  local last = math.min(#list, ACTIVE_GAME + 5) 
+  for i = first, last do
     if i == ACTIVE_GAME then
       next_y = ACTIVE_GAME_Y
       next_flag_alpha = 255
