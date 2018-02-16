@@ -3,6 +3,7 @@ require "hsl"
 require "global"
 require "transitions"
 require "settings"
+require "thumbnails"
 require "screens/tabs"
 require "screens/settings"
 require "screens/gamedetails"
@@ -163,6 +164,8 @@ function love.update(dt)
 
   tween.update(dt)
 
+  update_thumb()
+
   if SCREEN == SCREEN_TABS and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
     t1 = love.timer.getTime()
     ACTIVE_TAB = ACTIVE_TAB + 1
@@ -202,36 +205,6 @@ function love.update(dt)
 
     animateGameList()
   end
-
-  if thread then
-    local error = thread:getError()
-    assert( not error, error )
-    local thumbpath = love.thread.getChannel('thumb'):pop()
-    if thumbpath then
-      tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail = love.graphics.newImage(thumbpath)
-    end
-  end
-end
-
-thumbThread = [[
-  local thumbdir, thumbpath, thumburl = ...
-  local http = require("socket.http")
-  local b, c, h = http.request(thumburl)
-  if c == 200 then
-    love.filesystem.createDirectory(thumbdir)
-    love.filesystem.write(thumbpath, b)
-    love.thread.getChannel('thumb'):push(thumbpath)
-  end
-]]
-
-function download_thumb()
-  local thumbdir = "thumbnails/"..tabs[ACTIVE_TAB].fullname.."/Named_Boxarts"
-  local thumbpath = thumbdir.."/"..tabs[ACTIVE_TAB].children[ACTIVE_GAME].fullname..".png"
-  local thumburl = "http://thumbnails.libretro.com/"..tabs[ACTIVE_TAB].fullname.."/Named_Boxarts/"..tabs[ACTIVE_TAB].children[ACTIVE_GAME].fullname..".png"
-  if not love.filesystem.exists(thumbpath) then
-    thread = love.thread.newThread(thumbThread)
-    thread:start(thumbdir, thumbpath, thumburl)
-  end
 end
 
 function love.keypressed(key)
@@ -245,7 +218,6 @@ function love.keypressed(key)
       gamelistToSettings()
       SCREEN = SCREEN_SETTINGS
     else
-      --download_thumb()
       gamelistToGamedetails()
       SCREEN = SCREEN_GAMEDETAILS
     end

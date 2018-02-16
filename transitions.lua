@@ -36,8 +36,8 @@ end
 
 function animateGameList()
   local list = tabs[ACTIVE_TAB].children
-  local first = math.max(1, ACTIVE_GAME - 5)
-  local last = math.min(#list, ACTIVE_GAME + 5) 
+  local first = math.max(1, ACTIVE_GAME - 7)
+  local last = math.min(#list, ACTIVE_GAME + 7)
   for i = first, last do
     if i == ACTIVE_GAME then
       next_y = ACTIVE_GAME_Y
