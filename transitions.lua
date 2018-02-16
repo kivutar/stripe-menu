@@ -88,7 +88,7 @@ function tabsToGameList()
   animateGameList()
 end
 
-function gamelistToGame()
+function gamelistToGamedetails()
   local list = tabs[ACTIVE_TAB].children
   for i = 1, #list do
     if i ~= ACTIVE_GAME then
@@ -100,7 +100,7 @@ function gamelistToGame()
   tween(0.2, tabs[ACTIVE_TAB], {y = 80, zoom = 0.25, title_alpha = 0}, "outSine")
   tween(0.2, cursor, {alpha = 0}, "outSine")
   tween(0.2, gamelist_container, {y = -SCREEN_HEIGHT / 2 + 75}, "outSine")
-  tween(0.2, gamedetails_container, {y = 150}, "outSine")
+  tween(0.2, gamedetails_container, {y = 150}, "outSine", download_thumb)
 end
 
 function gamelistToSettings()
