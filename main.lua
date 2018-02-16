@@ -1,4 +1,5 @@
 tween = require "tween"
+http = require("socket.http")
 require "hsl"
 require "global"
 require "transitions"
@@ -45,6 +46,7 @@ function load_playlists()
       for line in lines:gmatch("[^\r\n]+") do
         table.insert(tab.children, {
           title = line,
+          fullname = line
         })
       end
       table.insert(tabs, tab)
@@ -201,6 +203,17 @@ function love.update(dt)
   end
 end
 
+function download_thumb()
+  local thumbdir = "thumbnails/"..tabs[ACTIVE_TAB].fullname.."/Named_Boxarts"
+  local thumbpath = thumbdir.."/"..tabs[ACTIVE_TAB].children[ACTIVE_GAME].fullname..".png"
+  if not love.filesystem.exists(thumbpath) then
+    local b, c, h = http.request("http://thumbnails.libretro.com/"..tabs[ACTIVE_TAB].fullname.."/Named_Boxarts/"..tabs[ACTIVE_TAB].children[ACTIVE_GAME].fullname..".png")
+    love.filesystem.createDirectory(thumbdir)
+    love.filesystem.write(thumbpath, b)
+    tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail = love.graphics.newImage(thumbpath)
+  end
+end
+
 function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
@@ -212,6 +225,7 @@ function love.keypressed(key)
       gamelistToSettings()
       SCREEN = SCREEN_SETTINGS
     else
+      download_thumb()
       gamelistToGame()
       SCREEN = SCREEN_GAMEDETAILS
     end
