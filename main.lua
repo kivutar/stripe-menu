@@ -28,23 +28,27 @@ tabs = {
 function load_playlists()
   local playlists = love.filesystem.getDirectoryItems("playlists")
   for k, playlist in ipairs(playlists) do
-    lines, size = love.filesystem.read("playlists/" .. playlist)
-    local tab = {
-      fullname = playlist,
-      title = playlist,
-      subtitle = "13 Games - 3 Favorites",
-      title_alpha = 0,
-      width = PASSIVE_TAB_WIDTH,
-      x = AFTER_X,
-      y = AFTER_Y,
-      icon = love.graphics.newImage("icons/"..THEME.."/"..playlist..".png"),
-      zoom = PASSIVE_TAB_ZOOM,
-      children = {}
-    }
-    for line in lines:gmatch("[^\r\n]+") do
-      table.insert(tab.children, {title=line})
+    if not playlist:find(".", 1, true) then
+      lines, size = love.filesystem.read("playlists/" .. playlist)
+      local tab = {
+        fullname = playlist,
+        title = playlist,
+        subtitle = "13 Games - 3 Favorites",
+        title_alpha = 0,
+        width = PASSIVE_TAB_WIDTH,
+        x = AFTER_X,
+        y = AFTER_Y,
+        icon = love.graphics.newImage("icons/"..THEME.."/"..playlist..".png"),
+        zoom = PASSIVE_TAB_ZOOM,
+        children = {}
+      }
+      for line in lines:gmatch("[^\r\n]+") do
+        table.insert(tab.children, {
+          title = line,
+        })
+      end
+      table.insert(tabs, tab)
     end
-    table.insert(tabs, tab)
   end
 end
 
