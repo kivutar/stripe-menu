@@ -31,6 +31,7 @@ function animateTabs()
   for i = 1, #list do
     tween(0.2, list[i], {alpha = 0, mark_alpha = 0, flag_alpha = 0}, "outSine")
   end
+  ACTIVE_GAME = 1
 end
 
 function animateGameList()
