@@ -16,11 +16,17 @@ function flag_games()
     local list = tabs[h].children
     for i = 1, #list do
       list[i].flags = {}
+      list[i].langflags = {}
       -- capture content of parenthesis
       for capture in list[i].title:gmatch("%s%((.-)%)") do
         -- split on comma
         for word in capture:gmatch("([^, ]+)") do
-          table.insert(list[i].flags, word)
+          -- language flags are 2 characters
+          if #word > 2 then
+            table.insert(list[i].flags, word)
+          else
+            table.insert(list[i].langflags, word)
+          end
         end
       end
       -- remove the parenthesis from the game title
