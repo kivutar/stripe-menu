@@ -102,7 +102,9 @@ function gamelistToGamedetails()
   tween(0.2, tabs[ACTIVE_TAB], {y = 80, zoom = 0.25, title_alpha = 0}, "outSine")
   tween(0.2, cursor, {alpha = 0}, "outSine")
   tween(0.2, gamelist_container, {y = -SCREEN_HEIGHT / 2 + 75}, "outSine")
-  tween(0.2, gamedetails_container, {y = 150}, "outSine", download_thumb)
+  tween(0.2, gamedetails_container, {y = 150}, "outSine",
+    function() return download_thumb(ACTIVE_TAB, ACTIVE_GAME) end
+  )
 end
 
 function gamelistToSettings()

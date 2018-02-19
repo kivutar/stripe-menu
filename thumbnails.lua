@@ -15,15 +15,16 @@ thumbThread =
   ]]
 
 -- If the thumbnail doesn't exist in the filesystem, spawn a thread to download it
-function download_thumb()
-  local thumbdir = "thumbnails/" .. tabs[ACTIVE_TAB].fullname .. "/Named_Boxarts"
-  local thumbpath = thumbdir .. "/" .. tabs[ACTIVE_TAB].children[ACTIVE_GAME].fullname .. ".png"
+function download_thumb(tabid, gameid)
+  local thumbdir = "thumbnails/" .. tabs[tabid].fullname .. "/Named_Boxarts"
+  local thumbpath = thumbdir .. "/" .. tabs[tabid].children[gameid].fullname .. ".png"
   local thumburl =
     "http://thumbnails.libretro.com/" ..
-    tabs[ACTIVE_TAB].fullname .. "/Named_Boxarts/" .. tabs[ACTIVE_TAB].children[ACTIVE_GAME].fullname .. ".png"
+    tabs[tabid].fullname .. "/Named_Boxarts/" .. tabs[tabid].children[gameid].fullname .. ".png"
   if not love.filesystem.exists(thumbpath) then
-    print("new")
     local thread = {
+      tabid = tabid,
+      gameid = gameid,
       thread = love.thread.newThread(thumbThread),
       path = thumbpath
     }
@@ -44,9 +45,9 @@ function update_thumb()
 
       if code then
         if code == 200 then
-          tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail = love.graphics.newImage(thread.path)
+          tabs[thread.tabid].children[thread.gameid].thumbnail = love.graphics.newImage(thread.path)
         else
-          tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail = image_error
+          tabs[thread.tabid].children[thread.gameid].thumbnail = image_error
         end
         table.remove(threads, i)
       end
