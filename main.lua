@@ -40,6 +40,7 @@ function load_playlists()
         x = AFTER_X,
         y = AFTER_Y,
         icon = love.graphics.newImage("icons/"..THEME.."/"..playlist..".png"),
+        bg = love.graphics.newImage("bg/"..playlist..".png"),
         zoom = PASSIVE_TAB_ZOOM,
         children = {}
       }
