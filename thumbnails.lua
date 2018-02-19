@@ -21,7 +21,9 @@ function download_thumb(tabid, gameid)
   local thumburl =
     "http://thumbnails.libretro.com/" ..
     tabs[tabid].fullname .. "/Named_Boxarts/" .. tabs[tabid].children[gameid].fullname .. ".png"
-  if not love.filesystem.exists(thumbpath) then
+  if love.filesystem.exists(thumbpath) then
+    tabs[tabid].children[gameid].thumbnail = love.graphics.newImage(thumbpath)
+  else
     local thread = {
       tabid = tabid,
       gameid = gameid,

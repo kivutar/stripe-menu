@@ -91,6 +91,8 @@ function tabsToGameList()
 end
 
 function gamelistToGamedetails()
+  tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail = nil
+
   local list = tabs[ACTIVE_TAB].children
   for i = 1, #list do
     if i ~= ACTIVE_GAME then
@@ -132,7 +134,9 @@ function gamedetailsToGamelist()
   tween(0.2, tabs[ACTIVE_TAB], {y = ACTIVE_Y, zoom = ACTIVE_TAB_ZOOM}, "outSine")
   tween(0.2, tabs[ACTIVE_TAB], {title_alpha = 255}, "outSine")
   tween(0.2, cursor, {alpha = 255}, "outSine")
-  tween(0.2, gamedetails_container, {y = SCREEN_HEIGHT}, "outSine")
+  tween(0.2, gamedetails_container, {y = SCREEN_HEIGHT}, "outSine",
+    function() tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail = nil end
+  )
 
   animateGameList()
 end
