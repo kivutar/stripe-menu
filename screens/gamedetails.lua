@@ -44,9 +44,9 @@ function GameDetails:draw()
   love.graphics.rectangle("fill", 0, 0, 1920, SCREEN_HEIGHT)
   love.graphics.setColor(255, 255, 255, 255)
   if tabs[ACTIVE_TAB].children[ACTIVE_GAME] then
-    local th = tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail
-    if th then
-      love.graphics.draw(th, 300, 60, 0, 550 / th:getWidth())
+    local thumb = tabs[ACTIVE_TAB].children[ACTIVE_GAME].thumbnail
+    if thumb then
+      love.graphics.draw(thumb, 300, 60, 0, 550 / thumb:getWidth())
     else
       GameDetails:draw_spinner()
     end

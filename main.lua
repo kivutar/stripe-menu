@@ -108,6 +108,7 @@ function love.load()
   smallfont = love.graphics.newFont("font.ttf", 25)
   bool_on = love.graphics.newImage("icons/" .. THEME .. "/on.png")
   bool_off = love.graphics.newImage("icons/" .. THEME .. "/off.png")
+  image_error = love.graphics.newImage("icons/" .. THEME .. "/image.png")
   load_playlists()
   color_tabs()
   init_gamelist()
@@ -130,8 +131,6 @@ function love.load()
 
   screen = Tabs
 end
-
-local thread
 
 function love.update(dt)
   t = t + dt
