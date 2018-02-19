@@ -85,7 +85,7 @@ function GameList:draw()
       end
     end
 
-    if list[i].mark then
+    if ACTIVE_TAB > 1 and list[i].mark then
       love.graphics.setFont(smallfont)
       love.graphics.setColor(255, 255, 255, list[i].mark_alpha)
       love.graphics.print(list[i].mark, 200, list[i].y + 56)
