@@ -70,7 +70,7 @@ function Tabs:draw()
       SCREEN_HEIGHT
     )
 
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(255, 255, 255, tabs[i].icon_alpha)
 
     love.graphics.draw(
       tabs[i].icon,
