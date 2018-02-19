@@ -39,17 +39,19 @@ function update_thumb()
   if #threads then
     for i = 1, #threads do
       local thread = threads[i]
-      local error = thread.thread:getError()
-      if error then print(error) end
-      local code = love.thread.getChannel(thread.path):pop()
+      if thread then
+        local error = thread.thread:getError()
+        if error then print(error) end
+        local code = love.thread.getChannel(thread.path):pop()
 
-      if code then
-        if code == 200 then
-          tabs[thread.tabid].children[thread.gameid].thumbnail = love.graphics.newImage(thread.path)
-        else
-          tabs[thread.tabid].children[thread.gameid].thumbnail = image_error
+        if code then
+          if code == 200 then
+            tabs[thread.tabid].children[thread.gameid].thumbnail = love.graphics.newImage(thread.path)
+          else
+            tabs[thread.tabid].children[thread.gameid].thumbnail = image_error
+          end
+          table.remove(threads, i)
         end
-        table.remove(threads, i)
       end
     end
   end
