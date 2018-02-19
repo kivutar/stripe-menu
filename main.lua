@@ -21,7 +21,7 @@ tabs = {
     width = ACTIVE_TAB_WIDTH,
     x = ACTIVE_X,
     y = ACTIVE_Y,
-    icon = love.graphics.newImage("icons/"..THEME.."/setting.png"),
+    icon = love.graphics.newImage("icons/" .. THEME .. "/setting.png"),
     zoom = ACTIVE_TAB_ZOOM,
     children = settings
   }
@@ -40,16 +40,19 @@ function load_playlists()
         width = PASSIVE_TAB_WIDTH,
         x = AFTER_X,
         y = AFTER_Y,
-        icon = love.graphics.newImage("icons/"..THEME.."/"..playlist..".png"),
-        bg = love.graphics.newImage("bg/"..playlist..".png"),
+        icon = love.graphics.newImage("icons/" .. THEME .. "/" .. playlist .. ".png"),
+        bg = love.graphics.newImage("bg/" .. playlist .. ".png"),
         zoom = PASSIVE_TAB_ZOOM,
         children = {}
       }
       for line in lines:gmatch("[^\r\n]+") do
-        table.insert(tab.children, {
-          title = line,
-          fullname = line
-        })
+        table.insert(
+          tab.children,
+          {
+            title = line,
+            fullname = line
+          }
+        )
       end
       table.insert(tabs, tab)
     end
@@ -77,8 +80,9 @@ function init_gamelist()
       end
       list[i].y = -ACTIVE_GAME * 80 + next_y + (i - 1) * 80
       list[i].alpha = 0
-      if love.filesystem.exists("thumbnails/"..tabs[h].fullname.."/Named_Boxarts/"..list[i].title..".png") then
-        list[i].thumbnail = love.graphics.newImage("thumbnails/"..tabs[h].fullname.."/Named_Boxarts/"..list[i].title..".png")
+      if love.filesystem.exists("thumbnails/" .. tabs[h].fullname .. "/Named_Boxarts/" .. list[i].title .. ".png") then
+        list[i].thumbnail =
+          love.graphics.newImage("thumbnails/" .. tabs[h].fullname .. "/Named_Boxarts/" .. list[i].title .. ".png")
       end
     end
   end
@@ -102,8 +106,8 @@ end
 function love.load()
   font = love.graphics.newFont("font.ttf", 40)
   smallfont = love.graphics.newFont("font.ttf", 25)
-  bool_on = love.graphics.newImage("icons/"..THEME.."/on.png")
-  bool_off = love.graphics.newImage("icons/"..THEME.."/off.png")
+  bool_on = love.graphics.newImage("icons/" .. THEME .. "/on.png")
+  bool_off = love.graphics.newImage("icons/" .. THEME .. "/off.png")
   load_playlists()
   color_tabs()
   init_gamelist()

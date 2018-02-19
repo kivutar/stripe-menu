@@ -77,10 +77,10 @@ function Tabs:draw()
       stack_width + tabs[i].width / 2 + tabs[i].x,
       tabs[i].y,
       0,
-      tabs[i].zoom*256.0/tabs[i].icon:getWidth(),
-      tabs[i].zoom*256.0/tabs[i].icon:getHeight(),
-      tabs[i].icon:getWidth()/2,
-      tabs[i].icon:getHeight()/2
+      tabs[i].zoom * 256.0 / tabs[i].icon:getWidth(),
+      tabs[i].zoom * 256.0 / tabs[i].icon:getHeight(),
+      tabs[i].icon:getWidth() / 2,
+      tabs[i].icon:getHeight() / 2
     )
 
     love.graphics.setColor(255, 255, 255, tabs[i].title_alpha)

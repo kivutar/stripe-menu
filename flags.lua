@@ -5,7 +5,7 @@ function load_flags()
   for k, image in ipairs(images) do
     name = image:match("^(.+).png$")
     if name then
-      flags[name] = love.graphics.newImage("flags/"..image)
+      flags[name] = love.graphics.newImage("flags/" .. image)
     end
   end
 end

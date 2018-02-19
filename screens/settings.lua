@@ -12,9 +12,9 @@ function Settings:draw_cursor()
 
   local a = (math.cos(t * 5) + 1) * 128 + 128
   love.graphics.setColor(255, 255, 255, math.min(a, 255))
-  love.graphics.rectangle("line", 300-20, 42, 1350, 100)
+  love.graphics.rectangle("line", 300 - 20, 42, 1350, 100)
   love.graphics.setColor(255, 255, 255, math.min(16, 255))
-  love.graphics.rectangle("fill", 300-20, 42, 1350, 100)
+  love.graphics.rectangle("fill", 300 - 20, 42, 1350, 100)
 
   love.graphics.setBlendMode("alpha")
 end
@@ -25,9 +25,9 @@ end
 
 function draw_settings_bool(setting, i)
   if setting.value then
-    love.graphics.draw(bool_on, 1460, 92 + (i - 1) * 100, 0, 0.7, 0.7, 0, bool_on:getHeight()/2)
+    love.graphics.draw(bool_on, 1460, 92 + (i - 1) * 100, 0, 0.7, 0.7, 0, bool_on:getHeight() / 2)
   else
-    love.graphics.draw(bool_off, 1460, 92 + (i - 1) * 100, 0, 0.7, 0.7, 0, bool_on:getHeight()/2)
+    love.graphics.draw(bool_off, 1460, 92 + (i - 1) * 100, 0, 0.7, 0.7, 0, bool_on:getHeight() / 2)
   end
 end
 
