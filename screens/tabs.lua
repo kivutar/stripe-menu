@@ -1,4 +1,35 @@
-function draw_tabs()
+Tabs = {}
+
+function Tabs:update(dt)
+  if love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
+    t1 = love.timer.getTime()
+    ACTIVE_TAB = ACTIVE_TAB + 1
+    if ACTIVE_TAB > #tabs then
+      ACTIVE_TAB = 1
+    end
+
+    animateTabs()
+  end
+
+  if love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
+    t1 = love.timer.getTime()
+    ACTIVE_TAB = ACTIVE_TAB - 1
+    if ACTIVE_TAB < 1 then
+      ACTIVE_TAB = #tabs
+    end
+
+    animateTabs()
+  end
+end
+
+function Tabs:keypressed(key)
+  if key == "return" then
+    tabsToGameList()
+    SCREEN = SCREEN_GAMELIST
+  end
+end
+
+function Tabs:draw()
   love.graphics.push()
   love.graphics.translate(tabs_container.x, 0)
 

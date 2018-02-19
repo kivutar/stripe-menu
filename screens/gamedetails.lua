@@ -1,4 +1,13 @@
-function draw_gamedetails_loading()
+GameDetails = {}
+
+function GameDetails:keypressed(key)
+  if key == "backspace" then
+    gamedetailsToGamelist()
+    SCREEN = SCREEN_GAMELIST
+  end
+end
+
+function GameDetails:draw_spinner()
   local b = (math.cos(t * 5) + 1) * 32 + 32
   love.graphics.setColor(0, 0, 0, b)
   love.graphics.rectangle("fill", 300, 60, 550, 550)
@@ -7,12 +16,10 @@ function draw_gamedetails_loading()
   love.graphics.circle("fill", 300+550/2 + math.cos(t * 5 + math.pi*0.5) * 40, 60+550/2 + math.sin(t * 5 + math.pi*0.5) * 40, 10)
   love.graphics.circle("fill", 300+550/2 + math.cos(t * 5 + math.pi*1.0) * 40, 60+550/2 + math.sin(t * 5 + math.pi*1.0) * 40, 10)
   love.graphics.circle("fill", 300+550/2 + math.cos(t * 5 + math.pi*1.5) * 40, 60+550/2 + math.sin(t * 5 + math.pi*1.5) * 40, 10)
-
 end
 
-function draw_gamedetails()
+function GameDetails:draw()
   local a = (math.cos(t * 5) + 1) * 128 + 128
-  
   
   love.graphics.push()
   love.graphics.translate(0, gamedetails_container.y)
@@ -26,7 +33,7 @@ function draw_gamedetails()
     if th then
       love.graphics.draw(th, 300, 60, 0, 550 / th:getWidth())
     else
-      draw_gamedetails_loading()
+      GameDetails:draw_spinner()
     end
   end
 

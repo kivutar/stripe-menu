@@ -167,76 +167,32 @@ function love.update(dt)
 
   update_thumb()
 
-  if SCREEN == SCREEN_TABS and love.keyboard.isDown("right") and love.timer.getTime() > t1 + 0.25 then
-    t1 = love.timer.getTime()
-    ACTIVE_TAB = ACTIVE_TAB + 1
-    if ACTIVE_TAB > #tabs then
-      ACTIVE_TAB = 1
-    end
-
-    animateTabs()
-  end
-
-  if SCREEN == SCREEN_TABS and love.keyboard.isDown("left") and love.timer.getTime() > t1 + 0.25 then
-    t1 = love.timer.getTime()
-    ACTIVE_TAB = ACTIVE_TAB - 1
-    if ACTIVE_TAB < 1 then
-      ACTIVE_TAB = #tabs
-    end
-
-    animateTabs()
-  end
-
-  if SCREEN == SCREEN_GAMELIST and love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
-    t1 = love.timer.getTime()
-    ACTIVE_GAME = ACTIVE_GAME + 1
-    if ACTIVE_GAME > #tabs[ACTIVE_TAB].children then
-      ACTIVE_GAME = 1
-    end
-
-    animateGameList()
-  end
-
-  if SCREEN == SCREEN_GAMELIST and love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 then
-    t1 = love.timer.getTime()
-    ACTIVE_GAME = ACTIVE_GAME - 1
-    if ACTIVE_GAME < 1 then
-      ACTIVE_GAME = #tabs[ACTIVE_TAB].children
-    end
-
-    animateGameList()
+  if SCREEN == SCREEN_TABS then
+    Tabs:update(dt)
+  elseif SCREEN == SCREEN_GAMELIST then
+    GameList:update(dt)
   end
 end
 
 function love.keypressed(key)
   if key == "escape" then
     love.event.quit()
-  elseif key == "return" and SCREEN == SCREEN_TABS then
-    tabsToGameList()
-    SCREEN = SCREEN_GAMELIST
-  elseif key == "return" and SCREEN == SCREEN_GAMELIST then
-    if tabs[ACTIVE_TAB].title == "Settings" then
-      gamelistToSettings()
-      SCREEN = SCREEN_SETTINGS
-    else
-      gamelistToGamedetails()
-      SCREEN = SCREEN_GAMEDETAILS
-    end
-  elseif key == "backspace" and SCREEN == SCREEN_GAMELIST then
-    animateTabs()
-    SCREEN = SCREEN_TABS
-  elseif key == "backspace" and SCREEN == SCREEN_GAMEDETAILS then
-    gamedetailsToGamelist()
-    SCREEN = SCREEN_GAMELIST
-  elseif key == "backspace" and SCREEN == SCREEN_SETTINGS then
-    settingsToGamelist()
-    SCREEN = SCREEN_GAMELIST
+  end
+
+  if SCREEN == SCREEN_TABS then
+    Tabs:keypressed(key)
+  elseif SCREEN == SCREEN_GAMELIST then
+    GameList:keypressed(key)
+  elseif SCREEN == SCREEN_GAMEDETAILS then
+    GameDetails:keypressed(key)
+  elseif SCREEN == SCREEN_SETTINGS then
+    GameDetails:keypressed(key)
   end
 end
 
 function love.draw()
-  draw_tabs()
-  draw_gamelist()
-  draw_gamedetails()
-  draw_settings()
+  Tabs:draw()
+  GameList:draw()
+  GameDetails:draw()
+  Settings:draw()
 end

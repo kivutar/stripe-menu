@@ -1,4 +1,13 @@
-function draw_settings_cursor()
+Settings = {}
+
+function Settings:keypressed(key)
+  if key == "backspace" and SCREEN == SCREEN_SETTINGS then
+    settingsToGamelist()
+    SCREEN = SCREEN_GAMELIST
+  end
+end
+
+function Settings:draw_cursor()
   love.graphics.setBlendMode("add")
 
   local a = (math.cos(t * 5) + 1) * 128 + 128
@@ -26,7 +35,7 @@ function draw_settings_list(setting, i)
   love.graphics.printf("◀ " .. setting.options[setting.value] .. " ▶", 300, 60 + (i - 1) * 100, 1310, "right")
 end
 
-function draw_settings()
+function Settings:draw()
   love.graphics.push()
   love.graphics.translate(0, settings_container.y)
 
@@ -51,7 +60,7 @@ function draw_settings()
     love.graphics.print("Empty", 300, 60)
   end
 
-  draw_settings_cursor()
+  Settings:draw_cursor()
 
   love.graphics.pop()
 end

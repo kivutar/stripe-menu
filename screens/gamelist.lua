@@ -1,4 +1,43 @@
-function draw_cursor()
+GameList = {}
+
+function GameList:update(dt)
+  if love.keyboard.isDown("down") and love.timer.getTime() > t1 + 0.15 then
+    t1 = love.timer.getTime()
+    ACTIVE_GAME = ACTIVE_GAME + 1
+    if ACTIVE_GAME > #tabs[ACTIVE_TAB].children then
+      ACTIVE_GAME = 1
+    end
+
+    animateGameList()
+  end
+
+  if love.keyboard.isDown("up") and love.timer.getTime() > t1 + 0.15 then
+    t1 = love.timer.getTime()
+    ACTIVE_GAME = ACTIVE_GAME - 1
+    if ACTIVE_GAME < 1 then
+      ACTIVE_GAME = #tabs[ACTIVE_TAB].children
+    end
+
+    animateGameList()
+  end
+end
+
+function GameList:keypressed(key)
+  if key == "return" then
+    if tabs[ACTIVE_TAB].title == "Settings" then
+      gamelistToSettings()
+      SCREEN = SCREEN_SETTINGS
+    else
+      gamelistToGamedetails()
+      SCREEN = SCREEN_GAMEDETAILS
+    end
+  elseif key == "backspace" then
+    animateTabs()
+    SCREEN = SCREEN_TABS
+  end
+end
+
+function GameList:draw_cursor()
   love.graphics.setColor(255, 255, 255, cursor.alpha)
 
   love.graphics.push()
@@ -24,7 +63,7 @@ function draw_cursor()
   love.graphics.setBlendMode("alpha")
 end
 
-function draw_gamelist()
+function GameList:draw()
   love.graphics.push()
   love.graphics.translate(0, gamelist_container.y)
 
@@ -53,7 +92,7 @@ function draw_gamelist()
     end
   end
 
-  draw_cursor()
+  GameList:draw_cursor()
 
   love.graphics.pop()
 end
