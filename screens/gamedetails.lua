@@ -3,7 +3,7 @@ GameDetails = {}
 function GameDetails:keypressed(key)
   if key == "backspace" then
     gamedetailsToGamelist()
-    SCREEN = SCREEN_GAMELIST
+    screen = GameList
   end
 end
 

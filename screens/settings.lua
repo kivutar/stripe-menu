@@ -1,9 +1,9 @@
 Settings = {}
 
 function Settings:keypressed(key)
-  if key == "backspace" and SCREEN == SCREEN_SETTINGS then
+  if key == "backspace" then
     settingsToGamelist()
-    SCREEN = SCREEN_GAMELIST
+    screen = GameList
   end
 end
 

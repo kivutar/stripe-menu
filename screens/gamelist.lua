@@ -26,14 +26,14 @@ function GameList:keypressed(key)
   if key == "return" then
     if tabs[ACTIVE_TAB].title == "Settings" then
       gamelistToSettings()
-      SCREEN = SCREEN_SETTINGS
+      screen = Settings
     else
       gamelistToGamedetails()
-      SCREEN = SCREEN_GAMEDETAILS
+      screen = GameDetails
     end
   elseif key == "backspace" then
     animateTabs()
-    SCREEN = SCREEN_TABS
+    screen = Tabs
   end
 end
 

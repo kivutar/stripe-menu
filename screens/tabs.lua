@@ -25,7 +25,7 @@ end
 function Tabs:keypressed(key)
   if key == "return" then
     tabsToGameList()
-    SCREEN = SCREEN_GAMELIST
+    screen = GameList
   end
 end
 

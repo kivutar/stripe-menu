@@ -156,6 +156,8 @@ function love.load()
       return pixel;
     }
   ]]
+
+  screen = Tabs
 end
 
 local thread
@@ -167,10 +169,8 @@ function love.update(dt)
 
   update_thumb()
 
-  if SCREEN == SCREEN_TABS then
-    Tabs:update(dt)
-  elseif SCREEN == SCREEN_GAMELIST then
-    GameList:update(dt)
+  if screen.update then
+    screen:update(dt)
   end
 end
 
@@ -179,14 +179,8 @@ function love.keypressed(key)
     love.event.quit()
   end
 
-  if SCREEN == SCREEN_TABS then
-    Tabs:keypressed(key)
-  elseif SCREEN == SCREEN_GAMELIST then
-    GameList:keypressed(key)
-  elseif SCREEN == SCREEN_GAMEDETAILS then
-    GameDetails:keypressed(key)
-  elseif SCREEN == SCREEN_SETTINGS then
-    GameDetails:keypressed(key)
+  if screen.keypressed then
+    screen:keypressed(key)
   end
 end
 
