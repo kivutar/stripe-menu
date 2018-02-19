@@ -7,30 +7,35 @@ function GameDetails:keypressed(key)
   end
 end
 
-function GameDetails:draw_spinner()
+function GameDetails:draw_spinner(x, y, w, h)
+  love.graphics.push()
+  love.graphics.translate(x, y)
+
   local b = (math.cos(t * 5) + 1) * 32 + 32
-  love.graphics.setColor(0, 0, 0, b)
-  love.graphics.rectangle("fill", 300, 60, 550, 550)
+  love.graphics.setColor(0, 0, 0, 0)
+  love.graphics.rectangle("fill", 0, 0, w, h)
   love.graphics.setColor(255, 255, 255, 128)
-  love.graphics.circle("fill", 300 + 550 / 2 + math.cos(t * 5) * 40, 60 + 550 / 2 + math.sin(t * 5) * 40, 10)
+  love.graphics.circle("fill", w / 2 + math.cos(t * 5) * 40, h / 2 + math.sin(t * 5) * 40, 10)
   love.graphics.circle(
     "fill",
-    300 + 550 / 2 + math.cos(t * 5 + math.pi * 0.5) * 40,
-    60 + 550 / 2 + math.sin(t * 5 + math.pi * 0.5) * 40,
+    w / 2 + math.cos(t * 5 + math.pi * 0.5) * 40,
+    h / 2 + math.sin(t * 5 + math.pi * 0.5) * 40,
     10
   )
   love.graphics.circle(
     "fill",
-    300 + 550 / 2 + math.cos(t * 5 + math.pi * 1.0) * 40,
-    60 + 550 / 2 + math.sin(t * 5 + math.pi * 1.0) * 40,
+    w / 2 + math.cos(t * 5 + math.pi * 1.0) * 40,
+    h / 2 + math.sin(t * 5 + math.pi * 1.0) * 40,
     10
   )
   love.graphics.circle(
     "fill",
-    300 + 550 / 2 + math.cos(t * 5 + math.pi * 1.5) * 40,
-    60 + 550 / 2 + math.sin(t * 5 + math.pi * 1.5) * 40,
+    w / 2 + math.cos(t * 5 + math.pi * 1.5) * 40,
+    h / 2 + math.sin(t * 5 + math.pi * 1.5) * 40,
     10
   )
+
+  love.graphics.pop()
 end
 
 function GameDetails:draw()
@@ -48,7 +53,7 @@ function GameDetails:draw()
     if thumb then
       love.graphics.draw(thumb, 300, 60, 0, 550 / thumb:getWidth())
     else
-      GameDetails:draw_spinner()
+      GameDetails:draw_spinner(300, 60, 550, 550)
     end
   end
 
