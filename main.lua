@@ -35,7 +35,7 @@ function load_playlists()
       lines, size = love.filesystem.read("playlists/" .. playlist)
       local tab = {
         fullname = playlist,
-        title = playlist,
+        title = playlist:gsub("(.-) %- ", "", 1):gsub("Nintendo Entertainment System", "NES"),
         subtitle = "13 Games - 3 Favorites",
         title_alpha = 0,
         icon_alpha = 255,

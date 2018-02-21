@@ -22,7 +22,6 @@ function flag_games()
         -- split on comma
         for word in capture:gmatch("([^,]+)") do
           word = word:match "^%s*(.-)%s*$"
-          print(word)
           -- language flags are 2 characters
           if #word > 2 then
             table.insert(list[i].flags, word)
